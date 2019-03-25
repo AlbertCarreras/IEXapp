@@ -1,5 +1,15 @@
+//MODULE IMPORTS
 import React, { Component } from 'react';
-import './App.css';
+import { connect } from "react-redux";
+import { Route, withRouter, Switch } from "react-router-dom";
+
+//REDUX
+const mapStateToProps = (state) => {
+  return {  }
+}
+
+const mapDispatchToProps = { }
+
 
 class App extends Component {
   render() {
@@ -13,4 +23,6 @@ class App extends Component {
   }
 }
 
-export default App;
+export default (withRouter(
+                  connect(mapStateToProps, mapDispatchToProps)(App)
+                ));
