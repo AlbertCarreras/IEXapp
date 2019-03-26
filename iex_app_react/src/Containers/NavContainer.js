@@ -17,8 +17,13 @@ const mapDispatchToProps = { }
 class Login extends Component {
   render() {
     return (
-      <div >
-        <NavLink to={config.route.URL_PORTFOLIO} exact>Portfolio</NavLink> | <NavLink to={config.route.URL_TRANSACTIONS} exact>Transactions</NavLink>
+      <div className="navbar">
+        <div>My IEX Trading App</div>
+        <div>
+          <NavLink to={config.route.URL_PORTFOLIO} exact>Portfolio</NavLink> 
+          <div> | </div>
+          <NavLink to={config.route.URL_TRANSACTIONS} exact>Transactions</NavLink>
+        </div>
       </div>
     );
   }

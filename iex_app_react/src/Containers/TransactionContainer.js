@@ -24,6 +24,4 @@ class TransactionContainer extends Component {
   }
 }
 
-export default (withRouter(
-                  connect(mapStateToProps, mapDispatchToProps)(TransactionContainer)
-                ));
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionContainer);

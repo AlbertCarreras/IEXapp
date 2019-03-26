@@ -24,16 +24,18 @@ class Login extends Component {
     return (
       <div>
           <NavContainer />
-          <Switch>
-              <Route
-                  exact path={config.route.URL_PORTFOLIO}
-                  component={PortfolioContainer}
-              />
-              <Route
-                  path={config.route.URL_TRANSACTIONS}
-                  component={TransactionContainer}
-              />    
-          </Switch>
+          <div className="main-container">
+            <Switch>
+                <Route
+                    exact path={config.route.URL_PORTFOLIO}
+                    component={PortfolioContainer}
+                />
+                <Route
+                    path={config.route.URL_TRANSACTIONS}
+                    component={TransactionContainer}
+                />    
+            </Switch>
+          </div>
       </div>
     );
   }

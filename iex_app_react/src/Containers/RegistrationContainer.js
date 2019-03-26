@@ -15,25 +15,24 @@ const RegistrationContainer = () => {
         // if () {
         //     return <Loading />
         // }
-        return   <Switch>
-                    <Route
-                        exact path={config.route.URL_SIGNUP}
-                        component={SignupContainer}
-                    />
-                    <Route
-                        path={config.route.URL_ROOT}
-                        component={LoginContainer}
-                    />    
-                </Switch>
+        return  <div className="welcome-container">
+                    <div className="welcome-message"> Welcome to Your New IEX Trading App</div>
+                    <div className="registration-form">
+                        <Switch>
+                            <Route
+                                exact path={config.route.URL_SIGNUP}
+                                component={SignupContainer}
+                            />
+                            <Route
+                                path={config.route.URL_ROOT}
+                                component={LoginContainer}
+                            />    
+                        </Switch>
+                    </div>
+                </div> 
     }
 
-    return (
-        <Fragment>
-
-           {displayRegistrationContainer()}
-            
-        </Fragment>
-    );
+    return ( displayRegistrationContainer() );
 };
 
 export default RegistrationContainer;

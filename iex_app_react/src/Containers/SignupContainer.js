@@ -15,18 +15,53 @@ const mapDispatchToProps = { }
 
 
 class Signup extends Component {
+
+  state={
+    username: "",
+    email: "",
+    password: ""
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          Sign up
+      <div >
+          <div className="title">Sign up</div>
+          <form className="form">
+              <label>
+                <input 
+                  type="text" 
+                  placeholder="Username"
+                  name="username" />
+              </label>
+              <label>
+                <input 
+                  type="email" 
+                  placeholder="Email"
+                  name="email" />
+              </label>
+              <label>
+                <input 
+                  type="password"
+                  placeholder="Password"
+                  name="password" />
+              </label>
+              <input 
+                  className="button"
+                  type="submit" 
+                  value="Create Account" />
+            </form>
+          
+          <span>Have an account? </span> 
           <NavLink to={config.route.URL_LOGIN} exact>Log in</NavLink>
-        </header>
       </div>
     );
   }
 }
 
-export default (withRouter(
-                  connect(mapStateToProps, mapDispatchToProps)(Signup)
-                ));
+export default (withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup)));

@@ -23,6 +23,4 @@ class PorfolioContainer extends Component {
   }
 }
 
-export default (withRouter(
-                  connect(mapStateToProps, mapDispatchToProps)(PorfolioContainer)
-                ));
+export default connect(mapStateToProps, mapDispatchToProps)(PorfolioContainer);

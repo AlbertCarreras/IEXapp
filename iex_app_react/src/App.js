@@ -22,7 +22,7 @@ class App extends Component {
   routerFunction = () => {
 
 
-    return false 
+    return true 
     ? <Switch>
         <Route
           path={config.route.URL_ROOT}
@@ -34,10 +34,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div>
           {this.routerFunction()}
-        </header>
       </div>
     );
   }
