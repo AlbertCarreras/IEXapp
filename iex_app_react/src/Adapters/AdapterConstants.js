@@ -14,6 +14,8 @@ const dev = {
     URL_HOME: '/home',
     URL_LOGIN: '/login',
     URL_SIGNUP: '/signup',
+    URL_PORTFOLIO: '/portfolio', 
+    URL_TRANSACTIONS: '/transactions', 
   }
 };
 

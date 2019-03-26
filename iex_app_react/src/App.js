@@ -8,6 +8,7 @@ import {config} from './Adapters/AdapterConstants'
 
 //COMPONENTS
 import RegistrationContainer from './Containers/RegistrationContainer'
+import MainContainer from './Containers/MainContainer'
 
 //REDUX
 const mapStateToProps = (state) => {
@@ -20,10 +21,15 @@ const mapDispatchToProps = { }
 class App extends Component {
   routerFunction = () => {
 
-    return <Route
-        path={config.route.URL_ROOT}
-        component={RegistrationContainer}
-    />
+
+    return false 
+    ? <Switch>
+        <Route
+          path={config.route.URL_ROOT}
+          component={RegistrationContainer}
+        />
+      </Switch>
+    : <MainContainer />
 }
 
   render() {
