@@ -7,10 +7,13 @@ import {
 } from '../Actions/types';
 
 //REDUCER IMPORTS
-import sectionA from "./reducer_";
+import userProfile from "./userProfileReducer";
+import trading from "./tradingReducer";
+
 
 const combinedReducers = combineReducers({
-    sectionA
+    userProfile,
+    trading
 });
 
 const reducer = (state, action) => {

@@ -1,3 +1,18 @@
+/* CROSS-SITE */
+.container-flex-column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 /* LOGIN-SIGNUP */
 .welcome-container {
   display: flex;
@@ -11,19 +26,11 @@
 }
 
 .registration-form {
-  display: flex;
   height: 400px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border: 1px solid black;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border: 1px solid red;
   margin: 10px 0px;
 }
@@ -44,6 +51,7 @@ input {
   margin: 0px;
   background-color: black;
   color: white;
+  cursor:pointer;
 }
 
 .title {
@@ -52,10 +60,6 @@ input {
 
 /* MAIN CONTAINER */
 .navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   height: 30px;
   border: 1px solid black;
   padding: 10px;
@@ -73,7 +77,35 @@ input {
 }
 
 .main-container {
-  display: flex;
-  flex-direction: row;
   border: 1px solid red;
+}
+
+.header {
+  margin: 10px 0px;
+  font-weight: bold;
+}
+
+/* PORTFOLIO */
+.portfolio-container {
+  align-items: flex-start;
+}
+
+.portfolio-container > div {
+  flex: 1;
+  text-align: center;
+}
+
+.list {
+  padding: 10px;
+  border-bottom: 1px solid black;
+  flex-wrap: wrap;
+}
+
+.list > div:nth-child(1), 
+.list > div:nth-child(2) {
+  flex: fix;
+}
+.list > div:nth-child(3) {
+  flex: 2;
+  text-align: end;
 }

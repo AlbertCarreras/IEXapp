@@ -31,7 +31,7 @@ class Login extends Component {
     return (
       <div >
           <div className="title">Log in</div>
-          <form className="form">
+          <form className="form container-flex-column">
               <label>
                 <input 
                   type="email" 

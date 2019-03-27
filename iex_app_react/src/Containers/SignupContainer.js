@@ -32,7 +32,7 @@ class Signup extends Component {
     return (
       <div >
           <div className="title">Sign up</div>
-          <form className="form">
+          <form className="form container-flex-column">
               <label>
                 <input 
                   type="text" 

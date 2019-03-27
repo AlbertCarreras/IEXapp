@@ -1,14 +1,15 @@
 //TYPE IMPORTS
+//TYPE IMPORTS
 import {
     LOGIN,
 } from '../Actions/types';
   
 const initialState = {
     username: "",
-    email: ""
+    email: "",
 }
 
-export default function sectionAReducer(state = initialState, action) {
+export default function userProfileReducer(state = initialState, action) {
     switch(action.type) {
 
         case LOGIN:

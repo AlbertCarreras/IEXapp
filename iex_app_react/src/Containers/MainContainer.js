@@ -33,7 +33,11 @@ class Login extends Component {
                 <Route
                     path={config.route.URL_TRANSACTIONS}
                     component={TransactionContainer}
-                />    
+                />   
+                <Route
+                  path={config.route.URL_ROOT}
+                  component={PortfolioContainer}
+                /> 
             </Switch>
           </div>
       </div>

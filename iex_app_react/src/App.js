@@ -22,7 +22,7 @@ class App extends Component {
   routerFunction = () => {
 
 
-    return true 
+    return false 
     ? <Switch>
         <Route
           path={config.route.URL_ROOT}

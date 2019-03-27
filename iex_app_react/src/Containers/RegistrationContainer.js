@@ -17,7 +17,7 @@ const RegistrationContainer = () => {
         // }
         return  <div className="welcome-container">
                     <div className="welcome-message"> Welcome to Your New IEX Trading App</div>
-                    <div className="registration-form">
+                    <div className="registration-form container-flex-column">
                         <Switch>
                             <Route
                                 exact path={config.route.URL_SIGNUP}

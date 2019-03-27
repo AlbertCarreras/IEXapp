@@ -17,7 +17,7 @@ const mapDispatchToProps = { }
 class Login extends Component {
   render() {
     return (
-      <div className="navbar">
+      <div className="navbar container-flex-row">
         <div>My IEX Trading App</div>
         <div>
           <NavLink to={config.route.URL_PORTFOLIO} exact>Portfolio</NavLink> 
