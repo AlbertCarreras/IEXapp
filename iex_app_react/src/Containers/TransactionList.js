@@ -1,9 +1,9 @@
 //MODULE IMPORTS
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 //COMPONENTS
-import TradeLine from './TradeLine'
+import TransactionLine from './TransactionLine'
 
 //REDUX
 const mapStateToProps = state => {
@@ -18,14 +18,14 @@ const mapDispatchToProps = { }
 class PortfolioContainer extends Component {
 
   createList = () => {
-      return this.props.transactions.map( tradeItem => <TradeLine data={tradeItem} />)
+      return this.props.transactions.map( tradeItem => <TransactionLine data={tradeItem} />)
   }
 
   render() {
     return (
         <div className='sub-container'>
           <div className="header">
-            PORTFOLIO Current Value ${this.props.currentValueStocks}USD
+            TRANSACTIONS
           </div>
           {this.createList()}
         </div>

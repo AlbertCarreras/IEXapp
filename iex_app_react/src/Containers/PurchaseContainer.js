@@ -18,7 +18,7 @@ class PurchaseContainer extends Component {
 
   render() {
     return (
-      <div className="container-flex-column">
+      <div className="sub-container container-flex-column">
         <div>
           <div className="header">
             CASH - ${this.props.currentBalance}USD

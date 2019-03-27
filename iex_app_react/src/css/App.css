@@ -13,6 +13,10 @@
   justify-content: center;
 }
 
+.flexible {
+  flex-direction: row;
+}
+
 /* LOGIN-SIGNUP */
 .welcome-container {
   display: flex;
@@ -103,9 +107,17 @@ input {
 
 .list > div:nth-child(1), 
 .list > div:nth-child(2) {
-  flex: fix;
+  flex: fixed;
 }
 .list > div:nth-child(3) {
   flex: 2;
   text-align: end;
+}
+
+/* not implemented */
+.sub-container {
+}
+
+@media screen and (max-width: 300px) {
+  
 }

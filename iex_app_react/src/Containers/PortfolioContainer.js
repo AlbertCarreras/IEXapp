@@ -22,7 +22,7 @@ class PortfolioContainer extends Component {
 
   render() {
     return (
-      <div className="portfolio-container container-flex-row">
+      <div className="container-flex-row portfolio-container">
         <PortfolioList />
         <PurchaseContainer />
       </div>
