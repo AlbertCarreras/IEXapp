@@ -31,7 +31,7 @@ class Login extends Component {
     return (
       <div >
           <div className="title">Log in</div>
-          <form className="form container-flex-column">
+          <div className="form container-flex-column">
               <label>
                 <input 
                   type="email" 
@@ -50,9 +50,9 @@ class Login extends Component {
               </label>
               <input 
                   className="button"
-                  type="submit" 
+                  type="button" 
                   value="Log me in!" />
-            </form>
+            </div>
           
           <span>New to the IEX Trading App? </span> 
           <NavLink to={config.route.URL_SIGNUP} exact>Sign up!</NavLink>

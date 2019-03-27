@@ -1,5 +1,5 @@
 //MODULE IMPORTS
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 //COMPONENTS
@@ -17,6 +17,25 @@ const mapDispatchToProps = { }
 
 class PortfolioContainer extends Component {
 
+  getCurrPriceShares =  () => {
+
+    let arrSymb = this.props.transactions.map(item  => item.symbol)
+
+    let setSymb = new Set(arrSymb)
+
+    let decodeSymb = decodeURI(Array.from(setSymb).join(","))
+
+    console.log(decodeSymb)
+
+    // try {
+    //   let resp = await fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${strSymb}&types=quote`)
+
+    //   console.log(await resp.json())
+
+    // } catch (error) {     }
+  }
+
+
   createList = () => {
       return this.props.transactions.map( tradeItem => <TradeLine data={tradeItem} />)
   }
@@ -27,6 +46,7 @@ class PortfolioContainer extends Component {
           <div className="header">
             PORTFOLIO Current Value ${this.props.currentValueStocks}USD
           </div>
+          {    this.getCurrPriceShares()          }
           {this.createList()}
         </div>
     );

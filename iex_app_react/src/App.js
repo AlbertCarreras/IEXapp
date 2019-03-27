@@ -5,6 +5,7 @@ import { Route, withRouter, Switch } from "react-router-dom";
 
 //ADAPTERS
 import {config} from './Adapters/AdapterConstants'
+// import symbols from './Adapters/AdapterSymb'
 
 //COMPONENTS
 import RegistrationContainer from './Containers/RegistrationContainer'
@@ -15,12 +16,10 @@ const mapStateToProps = (state) => {
   return {  }
 }
 
-const mapDispatchToProps = { }
-
+const mapDispatchToProps = { };
 
 class App extends Component {
   routerFunction = () => {
-
 
     return false 
     ? <Switch>

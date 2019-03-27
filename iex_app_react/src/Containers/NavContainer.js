@@ -1,7 +1,7 @@
 //MODULE IMPORTS
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Switch, Route, NavLink, withRouter} from 'react-router-dom';
+import { NavLink, withRouter} from 'react-router-dom';
 
 //ADAPTERS
 import {config} from './../Adapters/AdapterConstants'

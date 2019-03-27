@@ -32,7 +32,7 @@ class Signup extends Component {
     return (
       <div >
           <div className="title">Sign up</div>
-          <form className="form container-flex-column">
+          <div className="form container-flex-column">
               <label>
                 <input 
                   type="text" 
@@ -53,9 +53,9 @@ class Signup extends Component {
               </label>
               <input 
                   className="button"
-                  type="submit" 
+                  type="button" 
                   value="Create Account" />
-            </form>
+            </div>
           
           <span>Have an account? </span> 
           <NavLink to={config.route.URL_LOGIN} exact>Log in</NavLink>
