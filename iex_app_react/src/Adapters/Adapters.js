@@ -15,7 +15,7 @@ let symbolLibrary = (function () {
     return {
 
       getTotalPrice: function getTotalPrice(price, qty) {
-        return (price*qty).toFixed(2);
+        return + (price*qty).toFixed(2);
       },
 
       tickerFormatValidator: function tickerFormatValidator(ticker) {

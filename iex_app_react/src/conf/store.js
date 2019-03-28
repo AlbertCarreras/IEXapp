@@ -1,11 +1,13 @@
 //MODULE IMPORTS
 import {applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+
 
 //ROOT REDUCER IMPORT
 import reducer from '../Reducers/rootReducer';
 
-let middleware = []
+let middleware = [thunk]
 let enhancers = [ applyMiddleware(...middleware) ]
 
 if ( process.env.NODE_ENV === 'development') {

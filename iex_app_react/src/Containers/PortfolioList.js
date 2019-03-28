@@ -5,52 +5,46 @@ import { connect } from "react-redux";
 //COMPONENTS
 import TradeLine from './TradeLine'
 
+//ADAPTERS
+import symbolLibrary from '../Adapters/Adapters'
+
 //REDUX
 const mapStateToProps = state => {
   return { 
     transactions: state.trading.transactionList,
     currentValueStocks: state.trading.currentValueStocks,
+    mapPrices: state.trading.mapPrices,
    }
 }
 
-const mapDispatchToProps = { }
-
 class PortfolioContainer extends Component {
 
-  getCurrPriceShares =  () => {
-
-    let arrSymb = this.props.transactions.map(item  => item.symbol)
-
-    let setSymb = new Set(arrSymb)
-
-    let decodeSymb = decodeURI(Array.from(setSymb).join(","))
-
-    console.log(decodeSymb)
-
-    // try {
-    //   let resp = await fetch(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${strSymb}&types=quote`)
-
-    //   console.log(await resp.json())
-
-    // } catch (error) {     }
+  createList = () => {
+      return this.props.transactions.map( tradeItem => <TradeLine 
+                                                            currPrice={this.props.mapPrices[tradeItem.symbol]}
+                                                            data={tradeItem} />)
   }
 
+  getCurrentValueStock = () => {
+    let total = this.props.transactions.reduce( (acc, transaction) => {
+      let a = symbolLibrary.getTotalPrice(transaction.shares, this.props.mapPrices[transaction.symbol])
+      return acc + a
+    }, 0.00)
 
-  createList = () => {
-      return this.props.transactions.map( tradeItem => <TradeLine data={tradeItem} />)
+    return + total.toFixed(2)
   }
 
   render() {
     return (
         <div className='sub-container'>
           <div className="header">
-            PORTFOLIO Current Value ${this.props.currentValueStocks}USD
+            PORTFOLIO Current Value ${this.getCurrentValueStock()} USD*
           </div>
-          {    this.getCurrPriceShares()          }
           {this.createList()}
+          <div className="footnote">* Values calculated with Exchange Open Prices.</div>
         </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer);
+export default connect(mapStateToProps, null)(PortfolioContainer);

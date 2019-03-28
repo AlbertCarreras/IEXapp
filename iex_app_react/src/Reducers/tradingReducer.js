@@ -1,12 +1,12 @@
 //TYPE IMPORTS
-//TYPE IMPORTS
 import {
-    LOGIN,
+    PRICES_MAP
 } from '../Actions/types';
   
 const initialState = {
     accountBalance: 5000.00-300-3000-500,
     currentValueStocks: 1630,
+    mapPrices: {},
     transactionList: [ 
         {   id: 1,
             symbol: "AAPL",
@@ -16,7 +16,7 @@ const initialState = {
             currentValue: 330,
         },
         {   id: 2,
-            symbol: "ATT",
+            symbol: "AAT",
             shares: 2,
             pricePurchase: 1500,
             unitPurchase: "USD",
@@ -35,6 +35,13 @@ const initialState = {
             pricePurchase: 100,
             unitPurchase: "USD",
             currentValue: 300
+        },
+        {   id: 4,
+            symbol: "AEP-B",
+            shares: 5,
+            pricePurchase: 100,
+            unitPurchase: "USD",
+            currentValue: 300
         }
     ]
 }
@@ -42,10 +49,9 @@ const initialState = {
 export default function userProfileReducer(state = initialState, action) {
     switch(action.type) {
 
-        case LOGIN:
+        case PRICES_MAP:
             return { ...state,
-                username: action.payload.username,
-                email: action.payload.email,
+                mapPrices: action.payload.mapPrices,
             }
   
         default:

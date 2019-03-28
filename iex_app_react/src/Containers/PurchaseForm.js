@@ -25,7 +25,8 @@ class PurchaseForm extends Component {
   cleanState = () => {
     this.setState({
       quantity: "",
-      tickerPrice: 0
+      tickerPrice: 0,
+      errorMessage: ""
     })
   }
 

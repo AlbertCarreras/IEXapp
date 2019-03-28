@@ -21,7 +21,7 @@ class PurchaseContainer extends Component {
       <div className="sub-container container-flex-column">
         <div>
           <div className="header">
-            CASH - ${this.props.currentBalance}USD
+            CASH - ${this.props.currentBalance} USD
           </div>
         </div>
         <PurchaseForm />

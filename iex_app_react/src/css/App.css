@@ -114,6 +114,11 @@ input {
   text-align: end;
 }
 
+.footnote {
+  font-size: 10px;
+  font-style: italic;
+}
+
 /* not implemented */
 .sub-container {
 }
