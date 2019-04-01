@@ -39,8 +39,8 @@ class Signup extends Component {
                     // Login with same user and password and get JWT token.
                     authLibrary
                         .login(this.state)
-                        .then(json => {
-                            authLibrary.setToken(json.jwt);
+                        .then(resp => {
+                            authLibrary.setToken(resp.jwt);
                             this.props.jwtSavedInLocalStorage();
                             // this.props.history.push(config.route.URL_PORTFOLIO);
                     })
@@ -49,9 +49,9 @@ class Signup extends Component {
                     })
                   } 
                 else{ 
-                  json.json()
-                  .then(r => {
-                    this.props.addErrorMessage("email", r.errors[0])
+                  resp.json()
+                  .then(respJson => {
+                    this.props.addErrorMessage("email", respJson.errors[0])
                   })
                 }
               })

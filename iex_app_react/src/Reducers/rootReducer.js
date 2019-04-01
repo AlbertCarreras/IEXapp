@@ -7,12 +7,12 @@ import {
 } from '../Actions/types';
 
 //REDUCER IMPORTS
-import userProfile from "./userProfileReducer";
+import user from "./userReducer";
 import trading from "./tradingReducer";
 
 
 const combinedReducers = combineReducers({
-    userProfile,
+    user,
     trading
 });
 
