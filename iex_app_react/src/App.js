@@ -13,7 +13,9 @@ import MainContainer from './Containers/MainContainer'
 
 //REDUX
 const mapStateToProps = (state) => {
-  return {  }
+  return { 
+    loggedIn: state.user.loggedIn
+  }
 }
 
 const mapDispatchToProps = { };
@@ -21,7 +23,7 @@ const mapDispatchToProps = { };
 class App extends Component {
   routerFunction = () => {
 
-    return false 
+    return this.props.loggedIn
     ? <Switch>
         <Route
           path={config.route.URL_ROOT}

@@ -5,6 +5,8 @@ import { withRouter, NavLink} from 'react-router-dom';
 
 //ADAPTERS
 import {config} from './../Adapters/AdapterConstants'
+import authLibrary from './../Adapters/AdapterAuth'
+
 
 //REDUX
 const mapStateToProps = (state) => {
@@ -26,6 +28,36 @@ class Signup extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     })
+  }
+
+  handleSubmit = () => {
+    // Signup and get confirmation user was created.
+    return authLibrary
+              .signup(this.state)
+              .then(resp => { 
+                if (resp.ok) {
+                    // Login with same user and password and get JWT token.
+                    authLibrary
+                        .login(this.state)
+                        .then(json => {
+                            authLibrary.setToken(json.jwt);
+                            this.props.jwtSavedInLocalStorage();
+                            // this.props.history.push(config.route.URL_PORTFOLIO);
+                    })
+                    .catch(() => {
+                      this.props.history.push(config.route.URL_LOGIN);
+                    })
+                  } 
+                else{ 
+                  json.json()
+                  .then(r => {
+                    this.props.addErrorMessage("email", r.errors[0])
+                  })
+                }
+              })
+              .catch(() => {
+                this.props.history.push(config.route.URL_SIGNUP);
+              })
   }
 
   render() {

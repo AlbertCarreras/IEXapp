@@ -1,5 +1,4 @@
 //TYPE IMPORTS
-//TYPE IMPORTS
 import {
     LOGIN,
 } from '../Actions/types';
@@ -7,15 +6,17 @@ import {
 const initialState = {
     username: "",
     email: "",
+    loggedIn: false
 }
 
-export default function userProfileReducer(state = initialState, action) {
+export default function userReducer(state = initialState, action) {
     switch(action.type) {
 
         case LOGIN:
             return { ...state,
                 username: action.payload.username,
                 email: action.payload.email,
+                loggedIn: true
             }
   
         default:
