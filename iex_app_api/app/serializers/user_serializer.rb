@@ -1,6 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
   
-  attributes :id, :email, :username
+  attributes :email, :username
 
   has_many :shares
   

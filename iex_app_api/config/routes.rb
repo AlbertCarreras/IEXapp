@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       #Page setup
+      get '/users' => 'users#index'
       post '/interests' => 'interests#index'
       post '/interests/create' => 'interests#create' 
       

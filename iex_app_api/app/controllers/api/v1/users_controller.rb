@@ -1,6 +1,13 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authenticate_user,  only: [:update, :upload]
   
+  def index
+
+    @users = User.all
+    render json: @users
+  
+  end
+
   def update
 
     user = current_user
