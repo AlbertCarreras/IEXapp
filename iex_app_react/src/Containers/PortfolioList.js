@@ -28,10 +28,10 @@ class PortfolioContainer extends Component {
   getCurrentValueStock = () => {
     let total = this.props.transactions.reduce( (acc, transaction) => {
       let a = symbolLibrary.getTotalPrice(transaction.buy_amount, this.props.mapPrices[transaction.ticker])
-      return acc + + a
+      return acc + a
     }, 0.00)
 
-    return total
+    return symbolLibrary.formatCurrency(total)
   }
 
   render() {
