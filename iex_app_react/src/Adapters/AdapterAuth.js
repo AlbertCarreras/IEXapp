@@ -2,7 +2,7 @@
 import {config} from './AdapterConstants'
 import {INIT_HEADERS} from './AdapterConstants'
 
-class AdapterUser {
+class AdapterAuth {
 
   //JWT management
   // Save JWT token in local storage.
@@ -56,4 +56,4 @@ class AdapterUser {
   }        
 }
 
-export default AdapterUser;
+export default AdapterAuth;

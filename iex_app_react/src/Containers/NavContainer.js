@@ -22,10 +22,7 @@ const divStyleNav = {
 };
 
 class Nav extends Component {
-  state = {
-    selected: "portfolio"
-  }  
-
+  
   handleClick = (tab) => {
     this.setState({
       selected: tab
@@ -38,6 +35,15 @@ class Nav extends Component {
     this.props.history.push(config.route.URL_LOGIN);
   }
 
+  checkRoute = (tab) => {
+    var pathname = window.location.pathname;
+    if (pathname === tab || '/') {
+      return divStyleNav
+    } else if (pathname === tab) {
+      return divStyleNav
+    } else { return null }
+  }
+
   render() {
     return (
       <div className="navbar container-flex-row">
@@ -45,13 +51,11 @@ class Nav extends Component {
         <div>
           <NavLink 
               className="navLink"
-              onClick={() => this.handleClick("portfolio")}
-              style={this.state.selected === 'portfolio' ?  divStyleNav : null}
+              style={this.checkRoute("portfolio")}
               to={config.route.URL_PORTFOLIO} exact>Portfolio</NavLink> 
           <NavLink 
             className="navLink"
-            onClick={() => this.handleClick("transactions")}
-            style={this.state.selected === 'portfolio' ? null : divStyleNav}
+            style={this.checkRoute("transactions")}
             to={config.route.URL_TRANSACTIONS} exact>Transactions</NavLink>
           <span
             className="navLink" 
