@@ -37,9 +37,9 @@ class Nav extends Component {
 
   checkRoute = (tab) => {
     var pathname = window.location.pathname;
-    if (pathname === tab || '/') {
+    if (pathname === (`/${tab}` || '/')) {
       return divStyleNav
-    } else if (pathname === tab) {
+    } else if (pathname === `/${tab}`) {
       return divStyleNav
     } else { return null }
   }

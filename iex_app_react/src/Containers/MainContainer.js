@@ -1,7 +1,7 @@
 //MODULE IMPORTS
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Switch, Route, withRouter} from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect} from 'react-router-dom';
 
 //ADAPTERS
 import {config} from './../Adapters/AdapterConstants'
@@ -31,13 +31,14 @@ class Login extends Component {
                     component={PortfolioContainer}
                 />
                 <Route
-                    path={config.route.URL_TRANSACTIONS}
+                    exact path={config.route.URL_TRANSACTIONS}
                     component={TransactionContainer}
                 />   
                 <Route
-                  path={config.route.URL_ROOT}
+                  exact path={config.route.URL_ROOT}
                   component={PortfolioContainer}
                 /> 
+                <Redirect to="/portfolio" />
             </Switch>
           </div>
       </div>

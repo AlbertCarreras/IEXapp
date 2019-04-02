@@ -25,26 +25,22 @@ export const login = () => {
 
         let responseJSON = await response.json()
         
-        let dispatchLogin = (resp) => {console.log(resp)
-
-            dispatch( { 
+        let dispatchLogin = (resp) => dispatch( { 
                 type: LOGIN,
                 payload: {
                     username: resp.username,
                     email: resp.email
                 }
             }) 
-        }
 
-        let dispatchStoreShares = (resp) => {
-            dispatch( { 
+        let dispatchStoreShares = (resp) => dispatch( { 
                 type: SAVE_USER_FINANCIALS,
                 payload: {
                     transactions: resp.shares,
                     balance: resp.balance
                 }
             }) 
-        }
+            
         dispatchStoreShares( responseJSON )
         return dispatchLogin( responseJSON )
     }
