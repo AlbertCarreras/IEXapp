@@ -2,61 +2,63 @@
 import {config} from './AdapterConstants'
 import {INIT_HEADERS} from './AdapterConstants'
 
-let authLibrary = (function () {
+class AdapterUser {
 
-  return {
+  //JWT management
+  // Save JWT token in local storage.
+  static setToken(jsonToken) {
+    return localStorage.setItem("token", jsonToken)
+  }
 
-    //JWT management
-    // Save JWT token in local storage.
-    setToken: function setToken(jsonToken) {
-      return localStorage.setItem("token", jsonToken)
-    },
+  // Get JWT token from local storage.
+  static getToken() {
+    return localStorage.getItem("token")
+  }
 
+  // Save token as a cookie so the websocket authentication can retrieve JWT token and identify user.
+  // static saveTokenAsCookie() {
+  //   document.cookie = 'X-Authorization=' + this.getToken() + '; path=/';
+  // }
 
-    // Get JWT token from local storage.
-    getToken: function getToken(jsonToken) {
-      return localStorage.getItem("token")
-    },
+  // Delete JWT token from local storage.
+  static deleteToken() {
+    localStorage.removeItem("token")
+  }
 
-    // Delete JWT token from local storage.
-    deleteToken: function deleteToken() {
-      localStorage.removeItem("token")
-    },
+  // Fetch email/password to login and receive JWT token as a response. JWT is then used in getCurrentUser -Thunk action- ro retrieve user information
+  static async login(loginState) {
 
-    // Fetch email/password to login and receive JWT token as a response. JWT is then used in getCurrentUser -Thunk action- ro retrieve user information
-    login: async function login(loginState) {
+    let response = await fetch(`${config.url.API_ROOT}/user_token`, {
+      method: 'POST',
+      headers: INIT_HEADERS,
+      body: JSON.stringify({
+        "auth": {
+          "email": loginState.email.toLowerCase(),
+          "password": loginState.password
+        }})
+    })
+    let responseJSON = await response.json()
 
-      let response = await fetch(`${config.url.API_ROOT}/user_token`, {
-        method: 'POST',
-        headers: INIT_HEADERS,
-        body: JSON.stringify({
-          "auth": {
-            "email": loginState.email.toLowerCase(),
-            "password": loginState.password
-          }})
-      })
-      let responseJSON = await response.json()
+    return responseJSON
+  }
 
-      return responseJSON
-    },
+  // Fetch sing-up information to signup and receive JWT token as a response. JWT is then used in getCurrentUser -Thunk action- ro retrieve user information
+  static async signup(signupState) {
 
-    // Fetch sing-up information to signup and receive JWT token as a response. JWT is then used in getCurrentUser -Thunk action- ro retrieve user information
-    signup: async function signup(signupState) {
+    let response = await fetch(`${config.url.API_ROOT}/users/create`, {
+      method: 'POST',
+      headers: INIT_HEADERS,
+      body: JSON.stringify({
+        "user": {
+          "email": signupState.email.toLowerCase(),
+          "password": signupState.password,
+          "password_confirmation": signupState.confirmPassword,
+          "username": signupState.username
+        }})
+    })
 
-      let response = await fetch(`${config.url.API_ROOT}/users/create`, {
-        method: 'POST',
-        headers: INIT_HEADERS,
-        body: JSON.stringify({
-          "user": {
-            "email": signupState.email.toLowerCase(),
-            "password": signupState.password,
-            "password_confirmation": signupState.confirmPassword,
-            "username": signupState.username
-          }})
-      })
+    return response
+  }        
+}
 
-      return response
-    }        
-}})
-
-export default authLibrary;
+export default AdapterUser;

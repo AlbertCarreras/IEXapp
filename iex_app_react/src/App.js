@@ -24,13 +24,13 @@ class App extends Component {
   routerFunction = () => {
 
     return this.props.loggedIn
-    ? <Switch>
+    ? <MainContainer />
+    : <Switch>
         <Route
           path={config.route.URL_ROOT}
           component={RegistrationContainer}
         />
       </Switch>
-    : <MainContainer />
 }
 
   render() {

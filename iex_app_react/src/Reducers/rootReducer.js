@@ -7,7 +7,7 @@ import {
 } from '../Actions/types';
 
 //REDUCER IMPORTS
-import user from "./userReducer";
+import user from "./userAuthReducer";
 import trading from "./tradingReducer";
 
 

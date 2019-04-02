@@ -21,7 +21,8 @@ class Signup extends Component {
   state={
     username: "",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
   }
 
   handleChange = (event) => {
@@ -83,6 +84,15 @@ class Signup extends Component {
                   placeholder="Password"
                   name="password" />
               </label>
+              <label>
+                <input 
+                  type="password"
+                  placeholder="Confirmation Password"
+                  name="confirmation password"
+                  onChange={ this.handleChange }
+                  onKeyUp={this.pressedEnter}
+                  value={this.state.confirmPassword} />
+            </label>
               <input 
                   className="button"
                   type="button" 
