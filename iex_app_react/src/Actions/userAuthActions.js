@@ -14,7 +14,7 @@ export const login = () => {
 
     return async function (dispatch) {
 
-        let response = await fetch(`${config.url.API_ROOT}/user/auth`, {
+        let response = await fetch(`${config.url.API_ROOT}/users/auth`, {
             method: "GET",
             headers: {
                 "Accept": "application/json",

@@ -23,7 +23,7 @@ class AdapterAuth {
   // Fetch email/password to login and receive JWT token as a response. JWT is then used in getCurrentUser -Thunk action- ro retrieve user information
   static async login(loginState) {
 
-    let response = await fetch(`${config.url.API_ROOT}/user_token`, {
+    let response = await fetch(`${config.url.API_ROOT}/users/user_token`, {
       method: 'POST',
       headers: INIT_HEADERS,
       body: JSON.stringify({
@@ -40,7 +40,7 @@ class AdapterAuth {
   // Fetch sing-up information to signup and receive JWT token as a response. JWT is then used in getCurrentUser -Thunk action- ro retrieve user information
   static async signup(signupState) {
 
-    let response = await fetch(`${config.url.API_ROOT}/users/create`, {
+    let response = await fetch(`${config.url.API_ROOT}/users`, {
       method: 'POST',
       headers: INIT_HEADERS,
       body: JSON.stringify({
