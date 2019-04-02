@@ -9,11 +9,12 @@ import {
 //REDUCER IMPORTS
 import user from "./userAuthReducer";
 import trading from "./tradingReducer";
-
+import errorMessage from "./errorMessageReducer";
 
 const combinedReducers = combineReducers({
     user,
-    trading
+    trading,
+    errorMessage
 });
 
 const reducer = (state, action) => {

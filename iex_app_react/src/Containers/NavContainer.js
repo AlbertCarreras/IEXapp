@@ -5,16 +5,26 @@ import { NavLink, withRouter} from 'react-router-dom';
 
 //ADAPTERS
 import {config} from './../Adapters/AdapterConstants'
+import AdapterAuth from './../Adapters/AdapterAuth';
+
+// ACTIONS
+import { logout } from './../Actions/userAuthActions';
 
 //REDUX
-const mapStateToProps = (state) => {
-  return {  }
+const mapDispatchToProps = dispatch => {
+  return {
+      logout: () => dispatch(logout())
+  }
 }
 
-const mapDispatchToProps = { }
+class Nav extends Component {
 
+  handleLogout = () => {
+    AdapterAuth.deleteToken();
+    this.props.logout();
+    this.props.history.push(config.route.URL_LOGIN);
+  }
 
-class Login extends Component {
   render() {
     return (
       <div className="navbar container-flex-row">
@@ -23,12 +33,14 @@ class Login extends Component {
           <NavLink to={config.route.URL_PORTFOLIO} exact>Portfolio</NavLink> 
           <div> | </div>
           <NavLink to={config.route.URL_TRANSACTIONS} exact>Transactions</NavLink>
+          <div> | </div>
+          <span
+            onClick={this.handleLogout}
+          >Logout</span>
         </div>
       </div>
     );
   }
 }
 
-export default (withRouter(
-                  connect(mapStateToProps, mapDispatchToProps)(Login)
-                ));
+export default (withRouter( connect(null, mapDispatchToProps)(Nav) ));

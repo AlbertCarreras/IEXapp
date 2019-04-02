@@ -8,12 +8,13 @@ import {config} from './../Adapters/AdapterConstants'
 import AdapterUser from './../Adapters/AdapterAuth'
 
 // ACTIONS
-import { jwtSavedInLocalStorage, addErrorMessage, cleanErrorMessages } from './../Actions/userAuthActions';
+import { jwtSavedInLocalStorage } from './../Actions/userAuthActions';
+import { addErrorMessage, cleanErrorMessages } from './../Actions/errorMessageActions';
 
 // REDUX PROPS 
 const mapStateToProps = state => {
   return {
-      errorMessages: state.user.errorMessages,
+      errorMessages: state.errorMessage.errorMessages,
   }
 }
 

@@ -6,8 +6,6 @@ import {
     JWT, 
     LOGIN, 
     LOGOUT,
-    ADD_ERROR_MESSAGE,
-    CLEAN_ERROR_MESSAGES,
     SAVE_USER_FINANCIALS
 } from './types';
 
@@ -27,11 +25,12 @@ export const login = () => {
 
         let responseJSON = await response.json()
         
-        let dispatchLogin = (resp) => {
+        let dispatchLogin = (resp) => {console.log(resp)
+
             dispatch( { 
                 type: LOGIN,
                 payload: {
-                    name: resp.username,
+                    username: resp.username,
                     email: resp.email
                 }
             }) 
@@ -64,22 +63,3 @@ export function jwtSavedInLocalStorage() {
         type: JWT,
     }
 }
-
-export function addErrorMessage(key, value) {
-    return {
-        type: ADD_ERROR_MESSAGE,
-        payload: {
-            key: key,
-            value: value,
-        }
-    }
-}
-
-export function cleanErrorMessages() {
-    return {
-        type: CLEAN_ERROR_MESSAGES,
-        payload: {
-            errorMessages: {},
-        }
-    }
-} 
