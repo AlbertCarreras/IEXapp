@@ -5,7 +5,7 @@ import {
 } from '../Actions/types';
   
 const initialState = {
-    accountBalance: 0,
+    accountBalance: undefined,
     mapPrices: {},
     transactionList: []
 }

@@ -8,6 +8,9 @@ import {config} from './../Adapters/AdapterConstants'
 import LoginContainer from './LoginContainer'
 import SignupContainer from './SignupContainer' 
 
+//CONSTANTS
+const {URL_SIGNUP, URL_ROOT} = config.route;
+
 const RegistrationContainer = () => {
 
     function displayRegistrationContainer () {
@@ -17,11 +20,11 @@ const RegistrationContainer = () => {
                     <div className="registration-form container-flex-column">
                         <Switch>
                             <Route
-                                exact path={config.route.URL_SIGNUP}
+                                exact path={URL_SIGNUP}
                                 component={SignupContainer}
                             />
                             <Route
-                                path={config.route.URL_ROOT}
+                                path={URL_ROOT}
                                 component={LoginContainer}
                             />    
                         </Switch>

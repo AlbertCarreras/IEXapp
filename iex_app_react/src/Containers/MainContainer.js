@@ -11,15 +11,12 @@ import NavContainer from './NavContainer'
 import PortfolioContainer from './PortfolioContainer'
 import TransactionContainer from './TransactionContainer'
 
-//REDUX
-const mapStateToProps = (state) => {
-  return {  }
-}
-
-const mapDispatchToProps = { }
-
+//CONSTANTS
+const {URL_PORTFOLIO, URL_TRANSACTIONS, URL_ROOT} = config.route;
+const URL_REDIRECT = "/portfolio";
 
 class Login extends Component {
+
   render() {
     return (
       <div>
@@ -27,18 +24,18 @@ class Login extends Component {
           <div className="main-container">
             <Switch>
                 <Route
-                    exact path={config.route.URL_PORTFOLIO}
+                    exact path={URL_PORTFOLIO}
                     component={PortfolioContainer}
                 />
                 <Route
-                    exact path={config.route.URL_TRANSACTIONS}
+                    exact path={URL_TRANSACTIONS}
                     component={TransactionContainer}
                 />   
                 <Route
-                  exact path={config.route.URL_ROOT}
+                  exact path={URL_ROOT}
                   component={PortfolioContainer}
                 /> 
-                <Redirect to="/portfolio" />
+                <Redirect to={URL_REDIRECT} />
             </Switch>
           </div>
       </div>
@@ -46,6 +43,4 @@ class Login extends Component {
   }
 }
 
-export default (withRouter(
-                  connect(mapStateToProps, mapDispatchToProps)(Login)
-                ));
+export default (withRouter(connect(null, null)(Login)));

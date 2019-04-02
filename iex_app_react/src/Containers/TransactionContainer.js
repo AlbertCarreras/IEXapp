@@ -11,11 +11,8 @@ const mapStateToProps = state => {
     currentBalance: state.trading.accountBalance,
     transactions: state.trading.transactionList,
     currentValueStocks: state.trading.currentValueStocks,
-
    }
 }
-
-const mapDispatchToProps = { }
 
 class TransactionContainer extends Component {
 
@@ -28,4 +25,4 @@ class TransactionContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionContainer);
+export default connect(mapStateToProps, null)(TransactionContainer);

@@ -11,6 +11,8 @@ import AdapterAuth from './../Adapters/AdapterAuth'
 import { jwtSavedInLocalStorage } from './../Actions/userAuthActions';
 import { addErrorMessage, cleanErrorMessages } from './../Actions/errorMessageActions';
 
+//CONSTANTS
+const {URL_LOGIN, URL_PORTFOLIO, URL_SIGNUP} = config.route;
 
 // REDUX PROPS 
 const mapDispatchToProps = dispatch => {
@@ -27,7 +29,7 @@ const mapStateToProps = state => {
   }
 }
 
- 
+
 class Signup extends Component {
 
   state={
@@ -38,6 +40,9 @@ class Signup extends Component {
   }
 
   handleChange = (event) => {
+
+    if(Object.keys(this.props.errorMessages).length > 0) this.props.cleanErrorMessages();
+
     this.setState({
       [event.target.name]: event.target.value,
     })
@@ -45,9 +50,12 @@ class Signup extends Component {
 
   // Helper method to display error messages under each field.
   displayErrors = (field) => {
-    return this.props.errorMessages[field] 
-    ? <p>{this.props.errorMessages[field]}</p>
-    : null
+
+    const {errorMessages} = this.props;
+
+    return errorMessages[field] 
+            ? <p>{errorMessages[field]}</p>
+            : null
   }
 
   handlePressEnter = (event) => {
@@ -57,60 +65,77 @@ class Signup extends Component {
   }
 
   evaluateFields = () => {
-    this.props.cleanErrorMessages();
+
+    const {cleanErrorMessages, addErrorMessage} = this.props;
+    const {username, email, password, confirmPassword} = this.state;
+
+    cleanErrorMessages();
+
     var submitSignIn = true;
-    if (!this.state.username.trim()) {
+
+    if (!username.trim()) {
       submitSignIn = false;
-      this.props.addErrorMessage("username", "Enter a username.")
+      addErrorMessage("username", "Enter a username.")
     }
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
+
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
       submitSignIn = false;
-      this.props.addErrorMessage("email", "Invalid email address.")
+      addErrorMessage("email", "Invalid email address.")
     }
-    if (!(this.state.password.length > 7)) {
+
+    if (!(password.length > 7)) {
       submitSignIn = false;
-      this.props.addErrorMessage("password", "Password must be at least 8 characters.")
+      addErrorMessage("password", "Password must be at least 8 characters.")
     }
-    if (!!(this.state.password.length > 7)) {
-      if (!(this.state.password === this.state.confirmPassword)) {
+
+    if (!!(password.length > 7)) {
+      if (!(password === confirmPassword)) {
         submitSignIn = false;
-        this.props.addErrorMessage("confirmation", "Confirmation password must match password.")
+        addErrorMessage("confirmation", "Confirmation password must match password.")
       }
     }
+
     return submitSignIn
       ? this.handleSubmit() 
       : null;
   }
 
   handleSubmit = () => {
+
+    const {jwtSavedInLocalStorage, addErrorMessage, history} = this.props;
+
     // Signup and get confirmation user was created.
     return  AdapterAuth.signup(this.state)
-        .then(json => { 
-          if (json.ok) {
+        .then(resp => { 
+          if (resp.ok) {
               // Login with same user and password and get JWT token.
               AdapterAuth.login(this.state)
-              .then(json => {
-                AdapterAuth.setToken(json.jwt);
-                this.props.jwtSavedInLocalStorage();
-                this.props.history.push(config.route.URL_PORTFOLIO)
+              .then(resp => {
+                AdapterAuth.setToken(resp.jwt);
+                jwtSavedInLocalStorage();
+                history.push(URL_PORTFOLIO)
               })
               .catch(() => {
-                this.props.history.push(config.route.URL_LOGIN);
+                history.push(URL_LOGIN);
               })
             } 
           else{ 
-            json.json()
+            resp.json()
             .then(r => {
-              this.props.addErrorMessage("email", r.errors[0])
+              addErrorMessage("email", r.errors[0])
             })
           }
         })
       .catch(() => {
-        this.props.history.push(config.route.URL_SIGNUP);
+        history.push(URL_SIGNUP);
       })
   }
 
   render() {
+    
+    const {username, email, password, confirmPassword} = this.state;
+    const {URL_LOGIN} = config.route;
+
     return (
       <div >
           <div className="title">Sign up</div>
@@ -120,27 +145,30 @@ class Signup extends Component {
                 <input 
                   type="text" 
                   placeholder="Username"
+                  name="username" 
                   onChange={ this.handleChange }
                   onKeyUp={this.handlePressEnter}
-                  name="username" />
+                  value={username}/>
               </label>
               {this.displayErrors("username")}
               <label>
                 <input 
                   type="email" 
                   placeholder="Email"
+                  name="email" 
                   onChange={ this.handleChange }
                   onKeyUp={this.handlePressEnter}
-                  name="email" />
+                  value={email}/>
               </label>
               {this.displayErrors("email")}
               <label>
                 <input 
                   type="password"
                   placeholder="Password"
+                  name="password" 
                   onChange={ this.handleChange }
                   onKeyUp={this.handlePressEnter}
-                  name="password" />
+                  value={password}/>
               </label>
               {this.displayErrors("password")}
               <label>
@@ -150,7 +178,7 @@ class Signup extends Component {
                   name="confirmPassword"
                   onChange={ this.handleChange }
                   onKeyUp={this.handlePressEnter}
-                  value={this.state.confirmPassword} />
+                  value={confirmPassword} />
             </label>
             {this.displayErrors("confirmation")}
               <input 
@@ -161,7 +189,7 @@ class Signup extends Component {
             </div>
           
           <span>Have an account? </span> 
-          <NavLink to={config.route.URL_LOGIN} exact>Log in</NavLink>
+          <NavLink to={URL_LOGIN} exact>Log in</NavLink>
       </div>
     );
   }

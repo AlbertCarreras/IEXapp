@@ -6,7 +6,9 @@ import {
   
 const initialState = {
     jwtToken: false,
-    email: "",
+    id: undefined,
+    username: undefined,
+    email: undefined,
     loggedIn: false
 }
 

@@ -14,6 +14,9 @@ import MainContainer from './Containers/MainContainer'
 // ACTIONS
 import { login, jwtSavedInLocalStorage } from './Actions/userAuthActions';
 
+//CONSTANTS
+const {URL_ROOT} = config.route;
+
 //REDUX
 const mapStateToProps = (state) => {
   return { 
@@ -32,9 +35,12 @@ const mapDispatchToProps = dispatch => {
 class App extends Component {
 
   componentDidMount() { 
+
+    const {jwtSavedInLocalStorage, login} = this.props
+
     if (AdapterAuth.getToken()) {
-      this.props.jwtSavedInLocalStorage();
-      this.props.login();
+      jwtSavedInLocalStorage();
+      login();
     }
   }
 
@@ -53,7 +59,7 @@ class App extends Component {
     ? <MainContainer />
     : <Switch>
         <Route
-          path={config.route.URL_ROOT}
+          path={URL_ROOT}
           component={RegistrationContainer} />
       </Switch>
   }

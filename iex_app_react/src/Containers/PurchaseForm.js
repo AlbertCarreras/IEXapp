@@ -40,12 +40,14 @@ class PurchaseForm extends Component {
   }
 
   handleChange = (event) => {
+
     if(Object.keys(this.props.errorMessages).length > 0) this.props.cleanErrorMessages();
 
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
+
 
   fetchTicker = async () => {
 
@@ -69,24 +71,32 @@ class PurchaseForm extends Component {
     }
   }
 
+
   displayTotal = () => {
 
-    let totalPrice = symbolLibrary.getTotalFormattedPrice(this.state.tickerPrice, this.state.quantity)
+    const {tickerPrice, quantity} = this.state;
 
-    return this.state.tickerPrice === 0 || this.state.quantity === "" 
+    let totalPrice = symbolLibrary.getTotalFormattedPrice(tickerPrice, quantity)
+
+    return tickerPrice === 0 || quantity === "" 
     ? null 
     : <div>for a total of
-            ${totalPrice} USD {this.state.quantity > 1 ? `($${symbolLibrary.formatCurrency(this.state.tickerPrice)}/share)`: null}
+            ${totalPrice} USD {quantity > 1 ? `($${symbolLibrary.formatCurrency(tickerPrice)}/share)`: null}
       </div>
   }
 
+
   displayMessage = (field) => {
-    if (this.props.errorMessages[field]) {
-      return <p>{this.props.errorMessages[field]}</p>
+
+    const {errorMessages} = this.props;
+   
+    if (errorMessages[field]) {
+      return <p>{errorMessages[field]}</p>
     }
   }
 
   render() {
+    const {ticker, quantity} = this.state;
     return (
       <div >
         <div className="form">
@@ -97,7 +107,7 @@ class PurchaseForm extends Component {
                   placeholder="Ticker"
                   name="ticker"
                   onChange={ this.handleChange }
-                  value={this.state.ticker} />
+                  value={ticker} />
               </label>
 
               <div>{this.displayMessage("invalidTicker")}</div>
@@ -113,7 +123,7 @@ class PurchaseForm extends Component {
                       this.fetchTicker()
                     }
                   }
-                  value={this.state.quantity} />
+                  value={quantity} />
               </label>
 
               {this.displayTotal()}

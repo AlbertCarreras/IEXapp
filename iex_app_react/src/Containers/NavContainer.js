@@ -10,6 +10,12 @@ import AdapterAuth from './../Adapters/AdapterAuth';
 // ACTIONS
 import { logout } from './../Actions/userAuthActions';
 
+//CONSTANTS
+const {URL_LOGIN, URL_PORTFOLIO, URL_TRANSACTIONS} = config.route;
+const divStyleNav = {
+  fontWeight: '600'
+};
+
 //REDUX
 const mapDispatchToProps = dispatch => {
   return {
@@ -17,9 +23,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const divStyleNav = {
-  fontWeight: '600'
-};
 
 class Nav extends Component {
   
@@ -32,7 +35,7 @@ class Nav extends Component {
   handleLogout = () => {
     AdapterAuth.deleteToken();
     this.props.logout();
-    this.props.history.push(config.route.URL_LOGIN);
+    this.props.history.push(URL_LOGIN);
   }
 
   checkRoute = (tab) => {
@@ -52,11 +55,11 @@ class Nav extends Component {
           <NavLink 
               className="navLink"
               style={this.checkRoute("portfolio")}
-              to={config.route.URL_PORTFOLIO} exact>Portfolio</NavLink> 
+              to={URL_PORTFOLIO} exact>Portfolio</NavLink> 
           <NavLink 
             className="navLink"
             style={this.checkRoute("transactions")}
-            to={config.route.URL_TRANSACTIONS} exact>Transactions</NavLink>
+            to={URL_TRANSACTIONS} exact>Transactions</NavLink>
           <span
             className="navLink" 
             onClick={this.handleLogout}

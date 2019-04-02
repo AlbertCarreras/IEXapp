@@ -5,8 +5,10 @@ import React from 'react';
 import symbolLibrary from '../Adapters/Adapters'
 
 const TradeLine = props => {
+    const {buy_amount, ticker, buy_currency} = props.data;
+
     return (
-          <div className="list container-flex-row">{props.data.ticker} - {props.data.buy_amount} {props.data.buy_amount === 1 ? "share" : "shares"}: ${symbolLibrary.getTotalFormattedPrice(props.data.buy_amount, props.currPrice)} {props.data.buy_currency}
+          <div className="list container-flex-row">{ticker} - {buy_amount} {buy_amount === 1 ? "share" : "shares"}: ${symbolLibrary.getTotalFormattedPrice(buy_amount, props.currPrice)} {buy_currency}
         </div>
     );
 }

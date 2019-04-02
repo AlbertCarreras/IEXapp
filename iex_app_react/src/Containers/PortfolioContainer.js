@@ -28,13 +28,18 @@ const mapDispatchToProps = dispatch => {
 class PortfolioContainer extends Component {
 
   componentDidMount() {
-    if (this.props.transactions.length !== 0)this.props.getCurrentSharePrices(this.props.transactions)
+    const {transactions} = this.props;
+
+    if (transactions.length !== 0) this.props.getCurrentSharePrices(transactions)
   }
 
   isPortfolioUpdating = () => {
-    return (this.props.transactions.length !== 0 
+
+    const {transactions, mapPrices} = this.props;
+
+    return (transactions.length !== 0 
     && 
-    Object.entries(this.props.mapPrices).length === 0)
+    Object.entries(mapPrices).length === 0)
   }
 
   render() {

@@ -15,16 +15,17 @@ const mapStateToProps = state => {
    }
 }
 
-const mapDispatchToProps = { }
-
 class PurchaseContainer extends Component {
 
   render() {
+
+    const {currentBalance} = this.props;
+
     return (
       <div className="sub-container container-flex-column">
         <div>
           <div className="header">
-            CASH - ${symbolLibrary.formatCurrency(this.props.currentBalance)} USD
+            CASH - ${symbolLibrary.formatCurrency(currentBalance)} USD
           </div>
         </div>
         <PurchaseForm />
@@ -33,4 +34,4 @@ class PurchaseContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseContainer);
+export default connect(mapStateToProps, null)(PurchaseContainer);

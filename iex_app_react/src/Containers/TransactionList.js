@@ -13,7 +13,6 @@ const mapStateToProps = state => {
    }
 }
 
-const mapDispatchToProps = { }
 
 class PortfolioContainer extends Component {
 
@@ -35,4 +34,4 @@ class PortfolioContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer);
+export default connect(mapStateToProps, null)(PortfolioContainer);

@@ -26,6 +26,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+
 class Login extends Component {
 
   state={
@@ -48,26 +49,36 @@ class Login extends Component {
   }
   
   handleSubmit = () => {
-    if(Object.keys(this.props.errorMessages).length > 0) this.props.cleanErrorMessages();
+
+    const {jwtSavedInLocalStorage, errorMessages, cleanErrorMessages, addErrorMessage, history} = this.props;
+
+    if(Object.keys(errorMessages).length > 0) cleanErrorMessages();
 
     AdapterUser.login(this.state)
-    .then(json => { 
-      AdapterUser.setToken(json.jwt);
-        this.props.jwtSavedInLocalStorage();
-        this.props.history.push(config.route.URL_PORTFOLIO)
+    .then(resp => { 
+      AdapterUser.setToken(resp.jwt);
+        jwtSavedInLocalStorage();
+        history.push(config.route.URL_PORTFOLIO)
     })
     .catch(() => {
-      this.props.addErrorMessage("invalidCredentials", "The email or password did not match our records.")
+      addErrorMessage("invalidCredentials", "The email or password did not match our records.")
     })
   }
 
   displayMessage = (field) => {
-    if (this.props.errorMessages[field]) {
-      return <p>{this.props.errorMessages[field]}</p>
+
+    const {errorMessages} = this.props;
+
+    if (errorMessages[field]) {
+      return <p>{errorMessages[field]}</p>
     }
   }
 
   render() {
+
+    const {email, password} = this.state;
+    const {URL_SIGNUP} = config.route;
+
     return (
       <div >
           <div className="title">Log in</div>
@@ -80,7 +91,7 @@ class Login extends Component {
                   name="email"
                   onChange={ this.handleChange }
                   onKeyUp={this.handlePressEnter}
-                  value={this.state.email} />
+                  value={email} />
               </label>
               <label>
                 <input 
@@ -89,17 +100,17 @@ class Login extends Component {
                   name="password"
                   onChange={ this.handleChange }
                   onKeyUp={this.handlePressEnter}
-                  value={this.state.password} />
+                  value={password} />
               </label>
               <input 
                   className="button"
                   type="button" 
-                  onClick={ this.handleSubmit }
+                  onClick={this.handleSubmit}
                   value="Log me in!" />
             </div>
           
           <span>New to the IEX Trading App? </span> 
-          <NavLink to={config.route.URL_SIGNUP} exact>Sign up!</NavLink>
+          <NavLink to={URL_SIGNUP} exact>Sign up!</NavLink>
       </div>
     );
   }
