@@ -14,14 +14,22 @@
 let symbolLibrary = (function () {
     return {
 
+      getTotalFormattedPrice: function getTotalFormattedPrice(price, qty) {
+        return symbolLibrary.formatCurrency(+ (price*qty).toFixed(2));
+      },
+
       getTotalPrice: function getTotalPrice(price, qty) {
-        return + (price*qty).toFixed(2);
+        return (price*qty).toFixed(2);
       },
 
       tickerFormatValidator: function tickerFormatValidator(ticker) {
         let regexp = /([A-Z\-+]){1,5}/
-        console.log(ticker, regexp.test(ticker))
         return regexp.test(ticker)
+      },
+
+      formatCurrency: function formatCurrency(amount) {
+        amount = + amount
+        return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
       }
       
     }

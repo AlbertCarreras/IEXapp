@@ -15,11 +15,6 @@ class AdapterUser {
     return localStorage.getItem("token")
   }
 
-  // Save token as a cookie so the websocket authentication can retrieve JWT token and identify user.
-  // static saveTokenAsCookie() {
-  //   document.cookie = 'X-Authorization=' + this.getToken() + '; path=/';
-  // }
-
   // Delete JWT token from local storage.
   static deleteToken() {
     localStorage.removeItem("token")

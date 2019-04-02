@@ -1,5 +1,5 @@
 class ShareSerializer < ActiveModel::Serializer
   
-  attributes :buy_date, :ticker, :buy_amount, :buy_currency
+  attributes :id, :buy_date, :ticker, :buy_amount, :buy_price, :buy_currency
 
 end

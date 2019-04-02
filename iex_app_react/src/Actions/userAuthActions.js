@@ -7,7 +7,8 @@ import {
     LOGIN, 
     LOGOUT,
     ADD_ERROR_MESSAGE,
-    CLEAN_ERROR_MESSAGES
+    CLEAN_ERROR_MESSAGES,
+    SAVE_USER_FINANCIALS
 } from './types';
 
 //REDUX-THUNK actions with ASYNC/AWAIT
@@ -36,6 +37,16 @@ export const login = () => {
             }) 
         }
 
+        let dispatchStoreShares = (resp) => {
+            dispatch( { 
+                type: SAVE_USER_FINANCIALS,
+                payload: {
+                    transactions: resp.shares,
+                    balance: resp.balance
+                }
+            }) 
+        }
+        dispatchStoreShares( responseJSON )
         return dispatchLogin( responseJSON )
     }
 }

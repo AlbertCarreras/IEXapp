@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
+//ADAPTERS
+import symbolLibrary from '../Adapters/Adapters'
+
 //COMPONENTS
 import PurchaseForm from './PurchaseForm'
 
@@ -21,7 +24,7 @@ class PurchaseContainer extends Component {
       <div className="sub-container container-flex-column">
         <div>
           <div className="header">
-            CASH - ${this.props.currentBalance} USD
+            CASH - ${symbolLibrary.formatCurrency(this.props.currentBalance)} USD
           </div>
         </div>
         <PurchaseForm />

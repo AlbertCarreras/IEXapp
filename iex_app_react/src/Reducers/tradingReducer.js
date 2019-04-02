@@ -1,13 +1,14 @@
 //TYPE IMPORTS
 import {
-    PRICES_MAP
+    PRICES_MAP,
+    SAVE_USER_FINANCIALS
 } from '../Actions/types';
   
 const initialState = {
     accountBalance: 5000.00-300-3000-500,
     currentValueStocks: 1630,
     mapPrices: {},
-    transactionList: [ 
+    transactionList: [
         {   id: 1,
             symbol: "AAPL",
             shares: 1,
@@ -52,6 +53,11 @@ export default function userProfileReducer(state = initialState, action) {
         case PRICES_MAP:
             return { ...state,
                 mapPrices: action.payload.mapPrices,
+            }
+        case SAVE_USER_FINANCIALS:
+            return { ...state,
+                transactionList: action.payload.transactions,
+                accountBalance: action.payload.balance
             }
   
         default:

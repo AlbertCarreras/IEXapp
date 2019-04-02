@@ -40,7 +40,7 @@ class Login extends Component {
     })
   }
 
-  pressedEnter = (event) => {
+  handlePressEnter = (event) => {
     if (event.key === "Enter" ) {
       this.handleSubmit();
     }
@@ -53,7 +53,7 @@ class Login extends Component {
     .then(json => { 
       AdapterUser.setToken(json.jwt);
         this.props.jwtSavedInLocalStorage();
-        this.props.history.push(config.route.URL_PORFOLIO)
+        this.props.history.push(config.route.URL_PORTFOLIO)
     })
     .catch(() => {
       this.props.addErrorMessage("invalidCredentials", "The email or password did not match our records.")
@@ -78,7 +78,7 @@ class Login extends Component {
                   placeholder="Email"
                   name="email"
                   onChange={ this.handleChange }
-                  onKeyUp={this.pressedEnter}
+                  onKeyUp={this.handlePressEnter}
                   value={this.state.email} />
               </label>
               <label>
@@ -87,7 +87,7 @@ class Login extends Component {
                   placeholder="Password"
                   name="password"
                   onChange={ this.handleChange }
-                  onKeyUp={this.pressedEnter}
+                  onKeyUp={this.handlePressEnter}
                   value={this.state.password} />
               </label>
               <input 

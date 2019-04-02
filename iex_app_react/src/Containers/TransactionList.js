@@ -18,7 +18,9 @@ const mapDispatchToProps = { }
 class PortfolioContainer extends Component {
 
   createList = () => {
-      return this.props.transactions.map( tradeItem => <TransactionLine data={tradeItem} />)
+      return this.props.transactions.map( tradeItem => <div key={tradeItem.id}>
+        <TransactionLine data={tradeItem} />
+      </div>)
   }
 
   render() {

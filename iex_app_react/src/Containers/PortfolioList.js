@@ -20,18 +20,18 @@ const mapStateToProps = state => {
 class PortfolioContainer extends Component {
 
   createList = () => {
-      return this.props.transactions.map( tradeItem => <TradeLine 
-                                                            currPrice={this.props.mapPrices[tradeItem.symbol]}
-                                                            data={tradeItem} />)
+      return this.props.transactions.map( tradeItem => <div key={tradeItem.id}><TradeLine       
+        currPrice={this.props.mapPrices[tradeItem.ticker]}
+        data={tradeItem} /></div>)
   }
 
   getCurrentValueStock = () => {
     let total = this.props.transactions.reduce( (acc, transaction) => {
-      let a = symbolLibrary.getTotalPrice(transaction.shares, this.props.mapPrices[transaction.symbol])
-      return acc + a
+      let a = symbolLibrary.getTotalPrice(transaction.buy_amount, this.props.mapPrices[transaction.ticker])
+      return acc + + a
     }, 0.00)
 
-    return + total.toFixed(2)
+    return total
   }
 
   render() {

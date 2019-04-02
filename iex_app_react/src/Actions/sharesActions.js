@@ -9,7 +9,7 @@ export const getCurrentSharePrices = (transactions) => {
 
     return async function (dispatch) {
 
-        let mappedArrSymb = transactions.map(item  => item.symbol)
+        let mappedArrSymb = transactions.map(item  => item.ticker)
   
         let setSymb = new Set(mappedArrSymb)
       
@@ -37,7 +37,7 @@ export const getCurrentSharePrices = (transactions) => {
                     mapPrices: resp,
                 }
             })
-
+            
             return dispatchSaveCurrentSharePrices(mapPrices)
         
         } catch (err) {}
