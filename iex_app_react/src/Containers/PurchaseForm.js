@@ -5,13 +5,22 @@ import { connect } from "react-redux";
 //ADAPTERS
 import symbolLibrary from '../Adapters/Adapters'
 
-//REDUX
-const mapStateToProps = (state) => {
-  return {  }
+// ACTIONS
+import { addErrorMessage, cleanErrorMessages } from './../Actions/errorMessageActions';
+
+// REDUX PROPS 
+const mapStateToProps = state => {
+  return {
+      errorMessages: state.errorMessage.errorMessages,
+  }
 }
 
-const mapDispatchToProps = { }
-
+const mapDispatchToProps = dispatch => {
+  return {
+    addErrorMessage: (key, value) => dispatch(addErrorMessage(key, value)),
+    cleanErrorMessages: () => dispatch(cleanErrorMessages()),
+  }
+}
 
 class PurchaseForm extends Component {
 
@@ -31,10 +40,11 @@ class PurchaseForm extends Component {
   }
 
   handleChange = (event) => {
+    if(Object.keys(this.props.errorMessages).length > 0) this.props.cleanErrorMessages();
+
     this.setState({
       [event.target.name]: event.target.value,
     });
-    if (event.target.name === 'ticker') this.cleanState()
   }
 
   fetchTicker = async () => {
@@ -50,8 +60,10 @@ class PurchaseForm extends Component {
       })
 
     } catch (error) { 
+        this.props.addErrorMessage("invalidTicker", "Enter a valid ticker symbol.")
+
         this.setState({
-          errorMessage: "Enter valid ticker symbol.",
+          errorMessage: "Enter a valid ticker symbol.",
           quantity: ""
         })
     }
@@ -59,13 +71,19 @@ class PurchaseForm extends Component {
 
   displayTotal = () => {
 
-    let totalPrice = symbolLibrary.getTotalPrice(this.state.tickerPrice, this.state.quantity)
+    let totalPrice = symbolLibrary.getTotalFormattedPrice(this.state.tickerPrice, this.state.quantity)
 
     return this.state.tickerPrice === 0 || this.state.quantity === "" 
     ? null 
     : <div>for a total of
-            ${totalPrice} USD {this.state.quantity > 1 ? `(${this.state.tickerPrice}/share)`: null}
+            ${totalPrice} USD {this.state.quantity > 1 ? `($${symbolLibrary.formatCurrency(this.state.tickerPrice)}/share)`: null}
       </div>
+  }
+
+  displayMessage = (field) => {
+    if (this.props.errorMessages[field]) {
+      return <p>{this.props.errorMessages[field]}</p>
+    }
   }
 
   render() {
@@ -82,15 +100,12 @@ class PurchaseForm extends Component {
                   value={this.state.ticker} />
               </label>
 
-              {
-                this.state.errorMessage === "" 
-                ? null 
-                : <div>{this.state.errorMessage}</div>
-              }
+              <div>{this.displayMessage("invalidTicker")}</div>
 
               <label>
                 <input 
                   type="number"
+                  min="0"
                   placeholder="Quantity"
                   name="quantity"
                   onChange={ (event) => {
