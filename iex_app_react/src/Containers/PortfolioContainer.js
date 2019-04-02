@@ -28,13 +28,19 @@ const mapDispatchToProps = dispatch => {
 class PortfolioContainer extends Component {
 
   componentDidMount() {
-    this.props.getCurrentSharePrices(this.props.transactions)
+    if (this.props.transactions.length !== 0)this.props.getCurrentSharePrices(this.props.transactions)
+  }
+
+  isPortfolioUpdating = () => {
+    return (this.props.transactions.length !== 0 
+    && 
+    Object.entries(this.props.mapPrices).length === 0)
   }
 
   render() {
     return (
       <div className="container-flex-row portfolio-container">
-        { Object.entries(this.props.mapPrices).length === 0 && this.props.mapPrices.constructor === Object
+        { this.isPortfolioUpdating() 
           ? <div>Updating your portfolio...</div>
           : <Fragment>
               <PortfolioList />

@@ -18,7 +18,7 @@ const mapStateToProps = state => {
 }
 
 class PortfolioContainer extends Component {
-
+  
   createList = () => {
       return this.props.transactions.map( tradeItem => <div key={tradeItem.id}><TradeLine       
         currPrice={this.props.mapPrices[tradeItem.ticker]}
@@ -40,7 +40,9 @@ class PortfolioContainer extends Component {
           <div className="header">
             PORTFOLIO Current Value ${this.getCurrentValueStock()} USD*
           </div>
-          {this.createList()}
+          {this.props.transactions.length === 0 
+            ? <div>Your portfolio is empty.</div>
+            : this.createList()}
           <div className="footnote">* Values calculated with Exchange Open Prices.</div>
         </div>
     );
