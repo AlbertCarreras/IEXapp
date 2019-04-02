@@ -68,6 +68,7 @@ input {
   border: 1px solid black;
   padding: 10px;
 }
+
 .navbar > div:nth-child(1){
   flex: 2;
   text-align: center;
@@ -78,6 +79,20 @@ input {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.navbar > div:nth-child(2) > .navLink {
+  text-decoration: none;
+  color: black;
+  margin: 0px 8px; 
+}
+
+.navbar > div:nth-child(2) > .navLink:hover {
+  text-decoration-line: underline;
+}
+
+.selectedTab {
+
 }
 
 .main-container {

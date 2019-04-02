@@ -17,7 +17,20 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+const divStyleNav = {
+  fontWeight: '600'
+};
+
 class Nav extends Component {
+  state = {
+    selected: "portfolio"
+  }  
+
+  handleClick = (tab) => {
+    this.setState({
+      selected: tab
+    })
+  }
 
   handleLogout = () => {
     AdapterAuth.deleteToken();
@@ -30,11 +43,18 @@ class Nav extends Component {
       <div className="navbar container-flex-row">
         <div>My IEX Trading App</div>
         <div>
-          <NavLink to={config.route.URL_PORTFOLIO} exact>Portfolio</NavLink> 
-          <div> | </div>
-          <NavLink to={config.route.URL_TRANSACTIONS} exact>Transactions</NavLink>
-          <div> | </div>
+          <NavLink 
+              className="navLink"
+              onClick={() => this.handleClick("portfolio")}
+              style={this.state.selected === 'portfolio' ?  divStyleNav : null}
+              to={config.route.URL_PORTFOLIO} exact>Portfolio</NavLink> 
+          <NavLink 
+            className="navLink"
+            onClick={() => this.handleClick("transactions")}
+            style={this.state.selected === 'portfolio' ? null : divStyleNav}
+            to={config.route.URL_TRANSACTIONS} exact>Transactions</NavLink>
           <span
+            className="navLink" 
             onClick={this.handleLogout}
           >Logout</span>
         </div>
