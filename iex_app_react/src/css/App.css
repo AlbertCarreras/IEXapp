@@ -114,17 +114,18 @@ input {
   text-align: center;
 }
 
-.list {
+.list-item {
   padding: 10px;
   border-bottom: 1px solid black;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-.list > div:nth-child(1), 
-.list > div:nth-child(2) {
+.list-item > div:nth-child(1), 
+.list-item > div:nth-child(2) {
   flex: fixed;
 }
-.list > div:nth-child(3) {
+.list-item > div:nth-child(3) {
   flex: 2;
   text-align: end;
 }
@@ -139,8 +140,16 @@ input {
   background: black;
   font-size: 10px;
   padding: 5px;
-  margin: 0px 0px 0px 10px;
+  margin: 0px 10px;
   cursor:pointer;
+}
+
+.portfolio-note {
+  font-size: 10px;
+}
+
+.trend-price {
+  margin: 0px 10px;
 }
 
 /* not implemented */

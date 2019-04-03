@@ -25,9 +25,13 @@ export const getCurrentSharePrices = (transactions) => {
         function mapJson(resp) { 
             let map = {}
             for(let i in resp) {
+                let openPrice = resp[i].quote.open
+                let latestPrice = resp[i].quote.latestPrice
+                let trend = openPrice - latestPrice
                 map[i] = {
-                    openPrice: resp[i].quote.open,
-                    latestPrice: resp[i].quote.latestPrice
+                    openPrice: openPrice,
+                    latestPrice: latestPrice,
+                    trend: trend
                 }
             }
             return map

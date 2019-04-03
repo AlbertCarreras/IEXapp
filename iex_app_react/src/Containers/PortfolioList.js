@@ -30,22 +30,25 @@ const mapDispatchToProps = dispatch => {
 
 class PortfolioContainer extends Component {
 
-  trendPrice = (open, latest) => {
-    if (open === latest) return "grey"
-    return open < latest ? "green" : "red"
+  trendPriceColor = (diffPrices) => {
+    if (diffPrices === 0) return "grey"
+    return diffPrices < 0 ? "green" : "red"
   }
   
   createList = () => {
 
-      const {transactions, mapPrices} = this.props;
+      var {transactions, mapPrices} = this.props;
 
       return transactions.length === 0 
         ? <div>Your portfolio is empty.</div>
-        : transactions.map( tradeItem => <div key={tradeItem.id}>
+        : transactions
+          .sort((a,b) => mapPrices[a.ticker].trend - mapPrices[b.ticker].trend
+          )
+          .map( tradeItem => <div key={tradeItem.id}>
             <TradeLine       
               latestPrice={mapPrices[tradeItem.ticker].latestPrice}
-              openPrice={mapPrices[tradeItem.ticker].openPrice}
-              trendPrice={this.trendPrice}
+              diffPrice={mapPrices[tradeItem.ticker].trend}
+              trendPriceColor={this.trendPriceColor}
               data={tradeItem} 
               sellShares={(shareId) => this.props.sellShares(this.props.id, shareId)}
               />
