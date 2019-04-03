@@ -1,7 +1,8 @@
 //TYPE IMPORTS
 import {
     PRICES_MAP,
-    LIST_BOUGHT_SHARES
+    LIST_BOUGHT_SHARES,
+    SAVE_USER_FINANCIALS
 } from './types';
 
 //CONSTANTS
@@ -88,7 +89,7 @@ export const sellShares = (id, shareId) => {
 
     return async function (dispatch) {
 
-        fetch(`${API_ROOT}/users/${id}/shares/${shareId}`, {
+        let response = await fetch(`${API_ROOT}/users/${id}/shares/${shareId}`, {
                 method: "DELETE",
                 headers: {
                     "Accept": "application/json",
@@ -96,16 +97,16 @@ export const sellShares = (id, shareId) => {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                   }
               })
-        .then( resp => {
-            if (resp.ok) {
-                let listBoughtShares = (resp) => dispatch({ 
-                    type: LIST_BOUGHT_SHARES,
-                    payload: {
-                        new_transaction: resp.share,
-                        balance: resp.balance
-                    }
-                })
-                return listBoughtShares( resp.json() ) 
-            }})
+        let responseJSON =  await response.json()
+        
+        let listCurrentShares = (resp) => dispatch({ 
+            type: SAVE_USER_FINANCIALS,
+            payload: {
+                transactions: resp.shares,
+                balance: resp.balance
+            }
+        })
+        
+        return listCurrentShares( responseJSON ) 
     }
 }
