@@ -25,7 +25,10 @@ export const getCurrentSharePrices = (transactions) => {
         function mapJson(resp) { 
             let map = {}
             for(let i in resp) {
-                map[i] = resp[i].quote.open
+                map[i] = {
+                    openPrice: resp[i].quote.open,
+                    latestPrice: resp[i].quote.latestPrice
+                }
             }
             return map
         }
@@ -36,14 +39,14 @@ export const getCurrentSharePrices = (transactions) => {
 
             let mapPrices = mapJson(await response.json()) 
             
-            let dispatchSaveCurrentSharePrices = (mapPrices, setSymb) => dispatch( { 
+            let dispatchSaveCurrentSharePrices = (mapPrices) => dispatch( { 
                 type: PRICES_MAP,
                 payload: {
                     mapPrices: mapPrices
                 }
             })
             
-            return dispatchSaveCurrentSharePrices(mapPrices, setSymb)
+            return dispatchSaveCurrentSharePrices(mapPrices)
         
         } catch (err) {        }
     }

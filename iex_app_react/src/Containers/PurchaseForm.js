@@ -101,6 +101,7 @@ class PurchaseForm extends Component {
     const {buyShares, id} = this.props
 
     buyShares(ticker, quantity, id)
+    this.cleanState()
   }
 
   render() {

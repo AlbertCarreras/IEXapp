@@ -38,7 +38,8 @@ class PortfolioContainer extends Component {
         ? <div>Your portfolio is empty.</div>
         : transactions.map( tradeItem => <div key={tradeItem.id}>
             <TradeLine       
-              currPrice={mapPrices[tradeItem.ticker]}
+              latestPrice={mapPrices[tradeItem.ticker].latestPrice}
+              openPrice={mapPrices[tradeItem.ticker].open}
               data={tradeItem} 
               sellShares={(shareId) => this.props.sellShares(this.props.id, shareId)}
               />
@@ -52,7 +53,7 @@ class PortfolioContainer extends Component {
     let total = transactions.reduce( 
       (accum, transaction) => {
 
-        let pricePerShare = symbolLibrary.getTotalPrice(transaction.buy_amount, mapPrices[transaction.ticker])
+        let pricePerShare = symbolLibrary.getTotalPrice(transaction.buy_amount, mapPrices[transaction.ticker].latestPrice)
 
         return accum + pricePerShare
 
@@ -68,7 +69,7 @@ class PortfolioContainer extends Component {
             PORTFOLIO Current Value ${this.getCurrentValueStock()} USD*
           </div>
           {this.createList()}
-          <div className="footnote">* Values calculated with Exchange Open Prices.</div>
+          <div className="footnote">* Values calculated with Exchange Latest Prices.</div>
         </div>
     );
   }

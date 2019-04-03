@@ -134,6 +134,15 @@ input {
   font-style: italic;
 }
 
+.sell-btn {
+  color: white;
+  background: black;
+  font-size: 10px;
+  padding: 5px;
+  margin: 0px 0px 0px 10px;
+  cursor:pointer;
+}
+
 /* not implemented */
 .sub-container {
 }
