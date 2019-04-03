@@ -18,6 +18,9 @@ gem 'bcrypt', '~> 3.1.7'
 #Authorization & authentication
 gem 'knock'
 gem 'jwt'
+#Fetch functionality
+gem 'rest-client'
+gem 'json'
 
 
 # Use ActiveStorage variant

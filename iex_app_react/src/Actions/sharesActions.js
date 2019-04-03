@@ -6,8 +6,6 @@ import {
 
 //CONSTANTS
 import {config} from '../Adapters/AdapterConstants'
-import {AUTH_HEADERS_JSON_JWT} from './../Adapters/AdapterConstants'
-
 
 //REDUX-THUNK actions
 
@@ -46,7 +44,7 @@ export const getCurrentSharePrices = (transactions) => {
             
             return dispatchSaveCurrentSharePrices(mapPrices)
         
-        } catch (err) {}
+        } catch (err) {        }
     }
 }
 
@@ -56,9 +54,7 @@ export const buyShares = (ticker, amount, id) => {
 
     return async function (dispatch) {
 
-        try {
-
-            let response = await fetch(`${API_ROOT}/users/${id}/shares`, {
+        let response = await fetch(`${API_ROOT}/users/${id}/shares`, {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
@@ -67,23 +63,49 @@ export const buyShares = (ticker, amount, id) => {
                   },
                 body: JSON.stringify({
                     "shares": {
-                        "ticker": ticker,
+                        "ticker": ticker.toUpperCase(),
                         "amount": amount
                 }})
               })
-    
-            let responseJSON = await response.json()
-                
-            let listBoughtShares = (resp) => dispatch( { 
+
+        let responseJSON = await response.json()
+        
+        let listBoughtShares = (resp) => dispatch({ 
+            type: LIST_BOUGHT_SHARES,
+            payload: {
+                new_transaction: resp.share,
+                balance: resp.balance
+            }
+        })
+        
+        return listBoughtShares( responseJSON ) 
+    }
+}
+
+export const sellShares = (id, shareId) => {
+
+    const {API_ROOT} = config.url
+
+    return async function (dispatch) {
+
+        fetch(`${API_ROOT}/users/${id}/shares/${shareId}`, {
+                method: "DELETE",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                  }
+              })
+        .then( resp => {
+            if (resp.ok) {
+                let listBoughtShares = (resp) => dispatch({ 
                     type: LIST_BOUGHT_SHARES,
                     payload: {
-                        new_transaction: resp.shares,
+                        new_transaction: resp.share,
                         balance: resp.balance
                     }
-                }) 
-                
-            return listBoughtShares( responseJSON )
-
-        } catch (err) {}
+                })
+                return listBoughtShares( resp.json() ) 
+            }})
     }
 }

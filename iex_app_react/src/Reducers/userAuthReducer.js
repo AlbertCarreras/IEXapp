@@ -18,6 +18,7 @@ export default function userAuthReducer(state = initialState, action) {
             return { ...state,
                 username: action.payload.username,
                 email: action.payload.email,
+                id: action.payload.id,
                 loggedIn: true
             }
         

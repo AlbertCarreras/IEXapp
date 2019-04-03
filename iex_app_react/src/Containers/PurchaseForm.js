@@ -7,11 +7,13 @@ import symbolLibrary from '../Adapters/Adapters'
 
 // ACTIONS
 import { addErrorMessage, cleanErrorMessages } from './../Actions/errorMessageActions';
+import { buyShares } from './../Actions/sharesActions';
 
 // REDUX PROPS 
 const mapStateToProps = state => {
   return {
       errorMessages: state.errorMessage.errorMessages,
+      id: state.user.id
   }
 }
 
@@ -19,6 +21,7 @@ const mapDispatchToProps = dispatch => {
   return {
     addErrorMessage: (key, value) => dispatch(addErrorMessage(key, value)),
     cleanErrorMessages: () => dispatch(cleanErrorMessages()),
+    buyShares: (ticker, amount, id) => dispatch(buyShares(ticker, amount, id))
   }
 }
 
@@ -71,7 +74,6 @@ class PurchaseForm extends Component {
     }
   }
 
-
   displayTotal = () => {
 
     const {tickerPrice, quantity} = this.state;
@@ -85,7 +87,6 @@ class PurchaseForm extends Component {
       </div>
   }
 
-
   displayMessage = (field) => {
 
     const {errorMessages} = this.props;
@@ -93,6 +94,13 @@ class PurchaseForm extends Component {
     if (errorMessages[field]) {
       return <p>{errorMessages[field]}</p>
     }
+  }
+
+  buyShares = () => {
+    const {ticker, quantity} = this.state
+    const {buyShares, id} = this.props
+
+    buyShares(ticker, quantity, id)
   }
 
   render() {
@@ -107,7 +115,7 @@ class PurchaseForm extends Component {
                   placeholder="Ticker"
                   name="ticker"
                   onChange={ this.handleChange }
-                  value={ticker} />
+                  value={ticker.toUpperCase()} />
               </label>
 
               <div>{this.displayMessage("invalidTicker")}</div>
@@ -126,13 +134,14 @@ class PurchaseForm extends Component {
                   value={quantity} />
               </label>
 
-              {this.displayTotal()}
+              <div>{this.displayMessage("insufficientFunds")}</div>
+              <div>{this.displayTotal()}</div>
               
               <input 
                   className="button"
                   type="button" 
                   value="Purchase" 
-                  onClick={this.getCurrPriceShares}/>
+                  onClick={this.buyShares}/>
 
         </div>
       </div>

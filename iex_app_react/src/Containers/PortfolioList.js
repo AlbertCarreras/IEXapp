@@ -8,14 +8,25 @@ import TradeLine from './TradeLine'
 //ADAPTERS
 import symbolLibrary from '../Adapters/Adapters'
 
+// ACTIONS
+import { sellShares } from './../Actions/sharesActions';
+
 //REDUX
 const mapStateToProps = state => {
   return { 
+    id: state.user.id,
     transactions: state.trading.transactionList,
     currentValueStocks: state.trading.currentValueStocks,
     mapPrices: state.trading.mapPrices,
    }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    sellShares: (id, shareId) => dispatch(sellShares(id, shareId))
+  }
+}
+
 
 class PortfolioContainer extends Component {
   
@@ -25,9 +36,13 @@ class PortfolioContainer extends Component {
 
       return transactions.length === 0 
         ? <div>Your portfolio is empty.</div>
-        : transactions.map( tradeItem => <div key={tradeItem.id}><TradeLine       
-        currPrice={mapPrices[tradeItem.ticker]}
-        data={tradeItem} /></div>)
+        : transactions.map( tradeItem => <div key={tradeItem.id}>
+            <TradeLine       
+              currPrice={mapPrices[tradeItem.ticker]}
+              data={tradeItem} 
+              sellShares={(shareId) => this.props.sellShares(this.props.id, shareId)}
+              />
+          </div>)
   }
 
   getCurrentValueStock = () => {
@@ -59,4 +74,4 @@ class PortfolioContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, null)(PortfolioContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer);

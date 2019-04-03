@@ -13,37 +13,43 @@ import {
 export const login = () => {
 
     return async function (dispatch) {
-
-        let response = await fetch(`${config.url.API_ROOT}/users/auth`, {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-              }
-          })
-
-        let responseJSON = await response.json()
-        
-        let dispatchLogin = (resp) => dispatch( { 
-                type: LOGIN,
-                payload: {
-                    username: resp.username,
-                    email: resp.email
-                }
-            }) 
-
-        let dispatchStoreShares = (resp) => dispatch( { 
-                type: SAVE_USER_FINANCIALS,
-                payload: {
-                    transactions: resp.shares,
-                    balance: resp.balance
-                }
-            }) 
             
-        dispatchStoreShares( responseJSON )
-        return dispatchLogin( responseJSON )
-    }
+        try {
+
+            let response = await fetch(`${config.url.API_ROOT}/users/auth`, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+
+            let responseJSON = await response.json()
+            
+            let dispatchLogin = (resp) => dispatch( { 
+                    type: LOGIN,
+                    payload: {
+                        username: resp.username,
+                        email: resp.email,
+                        id: resp.id
+                    }
+                }) 
+
+            let dispatchStoreShares = (resp) => dispatch( { 
+                    type: SAVE_USER_FINANCIALS,
+                    payload: {
+                        transactions: resp.shares,
+                        balance: resp.balance
+                    }
+                }) 
+                
+            dispatchStoreShares( responseJSON )
+            return dispatchLogin( responseJSON )
+        }
+        
+        catch (err) { console.log(err) }
+    }  
 }
 
 //REDUX actions
