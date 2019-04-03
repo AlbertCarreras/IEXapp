@@ -17,7 +17,12 @@ const mapStateToProps = state => {
 class PortfolioContainer extends Component {
 
   createList = () => {
-      return this.props.transactions.map( tradeItem => <div key={tradeItem.id}>
+      
+      const {transactions} = this.props;
+
+      return transactions.length === 0 
+      ? <div>There is no transaction history.</div>
+      : transactions.map( tradeItem => <div key={tradeItem.id}>
         <TransactionLine data={tradeItem} />
       </div>)
   }

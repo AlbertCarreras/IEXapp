@@ -37,7 +37,7 @@ class PortfolioContainer extends Component {
   
   createList = () => {
 
-      var {transactions, mapPrices} = this.props;
+      const {transactions, mapPrices} = this.props;
 
       return transactions.length === 0 
         ? <div>Your portfolio is empty.</div>
