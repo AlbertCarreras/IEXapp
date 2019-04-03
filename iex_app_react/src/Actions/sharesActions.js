@@ -35,14 +35,14 @@ export const getCurrentSharePrices = (transactions) => {
 
             let mapPrices = mapJson(await response.json()) 
             
-            let dispatchSaveCurrentSharePrices = (resp) => dispatch( { 
+            let dispatchSaveCurrentSharePrices = (mapPrices, setSymb) => dispatch( { 
                 type: PRICES_MAP,
                 payload: {
-                    mapPrices: resp,
+                    mapPrices: mapPrices
                 }
             })
             
-            return dispatchSaveCurrentSharePrices(mapPrices)
+            return dispatchSaveCurrentSharePrices(mapPrices, setSymb)
         
         } catch (err) {        }
     }

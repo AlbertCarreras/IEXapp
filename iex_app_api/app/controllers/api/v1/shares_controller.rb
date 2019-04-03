@@ -40,8 +40,8 @@ class Api::V1::SharesController < ApplicationController
           buy_date: @new_share.buy_date,
           ticker: @new_share.ticker,
           buy_amount: @new_share.buy_amount,
-          buy_price: @new_share.buy_price
-          buy_currency: @new_share.buy_currency,
+          buy_price: @new_share.buy_price,
+          buy_currency: @new_share.buy_currency
         },
         balance: @user.balance
       } , status: 200

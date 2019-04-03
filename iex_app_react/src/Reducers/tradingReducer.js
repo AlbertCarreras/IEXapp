@@ -16,7 +16,7 @@ export default function userProfileReducer(state = initialState, action) {
 
         case PRICES_MAP:
             return { ...state,
-                mapPrices: action.payload.mapPrices,
+                mapPrices: action.payload.mapPrices
             }
         case SAVE_USER_FINANCIALS:
             return { ...state,
