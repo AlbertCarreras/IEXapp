@@ -6,6 +6,7 @@ import { NavLink, withRouter} from 'react-router-dom';
 //ADAPTERS
 import {config} from './../Adapters/AdapterConstants'
 import AdapterAuth from './../Adapters/AdapterAuth';
+import symbolLibrary from '../Adapters/Adapters'
 
 // ACTIONS
 import { logout } from './../Actions/userAuthActions';
@@ -17,6 +18,12 @@ const divStyleNav = {
 }; 
 
 //REDUX
+const mapStateToProps = state => {
+  return { 
+    username: state.user.username,
+   }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
       logout: () => dispatch(logout())
@@ -50,7 +57,10 @@ class Nav extends Component {
   render() {
     return (
       <div className="navbar container-flex-row">
-        <div>My IEX Trading App</div>
+        <div>
+          My IEX Trading App
+          <div className="portfolio-note">(signed in as {symbolLibrary.capitalize(this.props.username)})</div>
+        </div>
         <div>
           <NavLink 
               className="navLink"
@@ -70,4 +80,4 @@ class Nav extends Component {
   }
 }
 
-export default (withRouter( connect(null, mapDispatchToProps)(Nav) ));
+export default (withRouter( connect(mapStateToProps, mapDispatchToProps)(Nav) ));
