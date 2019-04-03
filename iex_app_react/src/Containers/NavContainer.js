@@ -14,7 +14,7 @@ import { logout } from './../Actions/userAuthActions';
 const {URL_LOGIN, URL_PORTFOLIO, URL_TRANSACTIONS} = config.route;
 const divStyleNav = {
   fontWeight: '600'
-};
+}; 
 
 //REDUX
 const mapDispatchToProps = dispatch => {
