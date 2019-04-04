@@ -2,7 +2,7 @@ require 'rest-client'
 require 'json'
 require 'uri'
 
-class Api::V1::SharesController < ApplicationController
+class Api::V1::SharesController < ApplicationControllergit 
   before_action :authenticate_user,  only: [:create, :destroy]
   
   def create
