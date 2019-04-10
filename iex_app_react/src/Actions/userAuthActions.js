@@ -1,5 +1,6 @@
 //CONSTANTS
 import {config} from '../Adapters/AdapterConstants'
+import AdapterAuth from '../Adapters/AdapterAuth'
 
 //TYPES
 import {
@@ -48,7 +49,14 @@ export const login = () => {
             return dispatchLogin( responseJSON )
         }
         
-        catch (err) { console.log(err) }
+        catch (err) {
+            
+            AdapterAuth.deleteToken();
+            
+            return dispatch({ 
+                type: LOGOUT,
+            })
+        } 
     }  
 }
 

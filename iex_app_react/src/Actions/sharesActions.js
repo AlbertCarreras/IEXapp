@@ -2,11 +2,13 @@
 import {
     PRICES_MAP,
     LIST_BOUGHT_SHARES,
-    SAVE_USER_FINANCIALS
+    SAVE_USER_FINANCIALS,
+    LOGOUT
 } from './types';
 
 //CONSTANTS
 import {config} from '../Adapters/AdapterConstants'
+import AdapterAuth from '../Adapters/AdapterAuth'
 
 //REDUX-THUNK actions
 
@@ -62,19 +64,21 @@ export const buyShares = (ticker, amount, id) => {
 
     return async function (dispatch) {
 
+        try {
+
         let response = await fetch(`${API_ROOT}/users/${id}/shares`, {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
-                  },
+                },
                 body: JSON.stringify({
                     "shares": {
                         "ticker": ticker.toUpperCase(),
                         "amount": amount
                 }})
-              })
+            })
 
         let responseJSON = await response.json()
         
@@ -88,6 +92,15 @@ export const buyShares = (ticker, amount, id) => {
         })
         
         return listBoughtShares( responseJSON ) 
+        }
+        catch (err) {
+            
+            AdapterAuth.deleteToken();
+            
+            return dispatch({ 
+                type: LOGOUT,
+            })
+        }   
     }
 }
 
@@ -97,25 +110,35 @@ export const sellShares = (id, shareId) => {
 
     return async function (dispatch) {
 
-        let response = await fetch(`${API_ROOT}/users/${id}/shares/${shareId}`, {
-                method: "DELETE",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                  }
-              })
-        let responseJSON =  await response.json()
-        
-        let listCurrentShares = (resp) => dispatch({ 
-            type: SAVE_USER_FINANCIALS,
-            payload: {
-                shares: resp.shares,
-                transactions: resp.transactions,
-                balance: resp.balance
-            }
-        })
-        
-        return listCurrentShares( responseJSON ) 
-    }
+        try {
+            let response = await fetch(`${API_ROOT}/users/${id}/shares/${shareId}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
+                })
+            let responseJSON =  await response.json()
+            
+            let listCurrentShares = (resp) => dispatch({ 
+                type: SAVE_USER_FINANCIALS,
+                payload: {
+                    shares: resp.shares,
+                    transactions: resp.transactions,
+                    balance: resp.balance
+                }
+            })
+            
+            return listCurrentShares( responseJSON ) 
+        }
+        catch (err) {
+                
+            AdapterAuth.deleteToken();
+            
+            return dispatch({ 
+                type: LOGOUT,
+            })
+        }
+    } 
 }

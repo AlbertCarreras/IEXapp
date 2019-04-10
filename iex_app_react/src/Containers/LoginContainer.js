@@ -117,7 +117,7 @@ class Login extends Component {
 
     const {email, password} = this.state;
     const {URL_SIGNUP} = config.route;
-
+    
     return (
       <div >
           <div className="title">Log in</div>
