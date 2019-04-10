@@ -1,9 +1,9 @@
-//MODULE IMPORTS
-import React, { Component } from 'react';
+//IMPORT MODULES
+import React from 'react';
 import { connect } from "react-redux";
 
-//COMPONENTS
-import TransactionLine from './TransactionLine'
+//IMPORT COMPONENTS
+import TransactionLine from '../Presentational/TransactionLine'
 
 //REDUX
 const mapStateToProps = state => {
@@ -13,30 +13,24 @@ const mapStateToProps = state => {
    }
 }
 
+const TransactionList = props => {
 
-class PortfolioContainer extends Component {
-
-  createList = () => {
-      
-      const {transactions} = this.props;
+  function createList() {
+      const {transactions} = props;
       
       return transactions.length === 0 
-      ? <div>There is no transaction history.</div>
-      : transactions.map( tradeItem => <div key={tradeItem.id}>
-        <TransactionLine data={tradeItem} />
+        ? <div>There is no transaction history.</div>
+        : transactions.map( tradeItem => <div key={tradeItem.id}>
+          <TransactionLine data={tradeItem} />
       </div>)
   }
 
-  render() {
-    return (
-        <div className='sub-container'>
-          <div className="header">
-            TRANSACTIONS
-          </div>
-          {this.createList()}
-        </div>
-    );
-  }
+  return (
+      <div className='sub-container'>
+        <div className="header">TRANSACTIONS</div>
+        {createList()}
+      </div>
+  );
 }
 
-export default connect(mapStateToProps, null)(PortfolioContainer);
+export default connect(mapStateToProps, null)(TransactionList);

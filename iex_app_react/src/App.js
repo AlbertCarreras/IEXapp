@@ -1,17 +1,17 @@
-//MODULE IMPORTS
+//IMPORT MODULES
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Route, withRouter, Switch } from "react-router-dom";
 
-//ADAPTERS
+//IMPORT ADAPTERS
 import {config} from './Adapters/AdapterConstants'
 import AdapterAuth from './Adapters/AdapterAuth'
 
-//COMPONENTS
-import RegistrationContainer from './Containers/RegistrationContainer'
+//IMPORT COMPONENTS
+import RegistrationRouter from './Presentational/RegistrationRouter'
 import MainContainer from './Containers/MainContainer'
 
-// ACTIONS
+//IMPORT ACTIONS
 import { login, jwtSavedInLocalStorage } from './Actions/userAuthActions';
 
 //CONSTANTS
@@ -60,7 +60,7 @@ class App extends Component {
     : <Switch>
         <Route
           path={URL_ROOT}
-          component={RegistrationContainer} />
+          component={RegistrationRouter} />
       </Switch>
   }
 

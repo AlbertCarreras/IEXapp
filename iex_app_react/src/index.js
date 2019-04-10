@@ -6,8 +6,8 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import * as serviceWorker from './conf/serviceWorker';
 
 //STYLE
-import './css/index.css';
-import './css/App.css';
+import './Styling/index.css';
+import './Styling/App.css';
 
 //STORE
 import store from './conf/store'

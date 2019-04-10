@@ -1,17 +1,17 @@
-//MODULE IMPORTS
+//IMPORT MODULES
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter, NavLink} from 'react-router-dom';
 
-//ADAPTERS
+//IMPORT ADAPTERS
 import {config} from './../Adapters/AdapterConstants'
 import AdapterUser from './../Adapters/AdapterAuth'
 
-// ACTIONS
+//IMPORT ACTIONS
 import { jwtSavedInLocalStorage } from './../Actions/userAuthActions';
 import { addErrorMessage, cleanErrorMessages } from './../Actions/errorMessageActions';
 
-// REDUX PROPS 
+//REDUX 
 const mapStateToProps = state => {
   return {
       errorMessages: state.errorMessage.errorMessages,
@@ -55,7 +55,6 @@ class Login extends Component {
             ? <div className="validation-message">{errorMessages[field]}</div>
             : null
   }
-  
 
   handlePressEnter = (event) => {
     if (event.key === "Enter" ) {

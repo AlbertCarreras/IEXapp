@@ -1,7 +1,7 @@
-//MODULE IMPORTS
+//IMPORT MODULES
 import React from 'react';
 
-//ADAPTERS
+//IMPORT ADAPTERS
 import symbolLibrary from '../Adapters/Adapters'
 
 const TradeLine = props => {

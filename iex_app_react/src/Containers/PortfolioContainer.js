@@ -1,12 +1,12 @@
-//MODULE IMPORTS
+//IMPORT MODULES
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 
-//COMPONENTS
+//IMPORT COMPONENTS
 import PurchaseContainer from './PurchaseContainer'
 import PortfolioList from './PortfolioList'
 
-// ACTIONS
+//IMPORT ACTIONS
 import { getCurrentSharePrices } from '../Actions/sharesActions';
 
 //REDUX
@@ -43,7 +43,6 @@ class PortfolioContainer extends Component {
   }
 
   isPortfolioUpdating = () => {
-
     const {shares, mapPrices} = this.props;
 
     return (shares.length !== 0 

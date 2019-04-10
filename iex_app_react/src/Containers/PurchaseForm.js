@@ -1,15 +1,15 @@
-//MODULE IMPORTS
+//IMPORT MODULES
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
-//ADAPTERS
+//IMPORT ADAPTERS
 import symbolLibrary from '../Adapters/Adapters'
 
-// ACTIONS
+//IMPORT ACTIONS
 import { addErrorMessage, cleanErrorMessages } from './../Actions/errorMessageActions';
 import { buyShares } from './../Actions/sharesActions';
 
-// REDUX PROPS 
+//REDUX 
 const mapStateToProps = state => {
   return {
       errorMessages: state.errorMessage.errorMessages,
@@ -54,7 +54,6 @@ class PurchaseForm extends Component {
 
 
   fetchTicker = async () => {
-
     try {
       let resp = await fetch(`https://api.iextrading.com/1.0//stock/${encodeURI(this.state.ticker)}/price`)
 
@@ -76,7 +75,6 @@ class PurchaseForm extends Component {
   }
 
   displayTotal = () => {
-
     const {tickerPrice, quantity} = this.state;
 
     let totalPrice = symbolLibrary.getTotalFormattedPrice(tickerPrice, quantity)
@@ -89,7 +87,6 @@ class PurchaseForm extends Component {
   }
 
   displayMessage = (field) => {
-
     const {errorMessages} = this.props;
    
     if (errorMessages[field]) {

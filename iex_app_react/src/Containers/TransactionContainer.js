@@ -1,5 +1,5 @@
 //MODULE IMPORTS
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 
 //COMPONENTS
@@ -14,15 +14,12 @@ const mapStateToProps = state => {
    }
 }
 
-class TransactionContainer extends Component {
-
-  render() {
+const TransactionContainer = props => {
     return (
       <div className="container-flex-row portfolio-container">
         <TransactionList />
       </div>
     );
-  }
 }
 
 export default connect(mapStateToProps, null)(TransactionContainer);

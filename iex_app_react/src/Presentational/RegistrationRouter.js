@@ -1,19 +1,18 @@
+//IMPORT MODULES
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
 
-//ADAPTERS
+//IMPORT ADAPTERS
 import {config} from './../Adapters/AdapterConstants'
 
-//COMPONENTS
-import LoginContainer from './LoginContainer'
-import SignupContainer from './SignupContainer' 
+//IMPORT COMPONENTS
+import LoginContainer from '../Containers/LoginContainer'
+import SignupContainer from '../Containers/SignupContainer' 
 
 //CONSTANTS
 const {URL_SIGNUP, URL_ROOT} = config.route;
 
-const RegistrationContainer = () => {
-
-    function displayRegistrationContainer () {
+const RegistrationRouter = () => {
        
         return  <div className="welcome-container">
                     <div className="welcome-message"> Welcome to Your New IEX Trading App</div>
@@ -30,9 +29,6 @@ const RegistrationContainer = () => {
                         </Switch>
                     </div>
                 </div> 
-    }
-
-    return ( displayRegistrationContainer() );
 };
 
-export default RegistrationContainer;
+export default RegistrationRouter;

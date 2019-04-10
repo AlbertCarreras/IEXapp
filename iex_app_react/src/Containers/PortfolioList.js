@@ -1,14 +1,14 @@
-//MODULE IMPORTS
-import React, { Component } from 'react';
+//IMPORT MODULES
+import React from 'react';
 import { connect } from "react-redux";
 
-//COMPONENTS
-import TradeLine from './TradeLine'
+//IMPORT COMPONENTS
+import TradeLine from '../Presentational/TradeLine'
 
-//ADAPTERS
+//IMPORT ADAPTERS
 import symbolLibrary from '../Adapters/Adapters'
 
-// ACTIONS
+//IMPORT ACTIONS
 import { sellShares } from './../Actions/sharesActions';
 
 //REDUX
@@ -27,17 +27,16 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+const PortfolioList = props => {
 
-class PortfolioContainer extends Component {
-
-  trendPriceColor = (diffPrices) => {
+  function trendPriceColor(diffPrices) {
     if (diffPrices === 0) return "grey"
     return diffPrices < 0 ? "green" : "red"
   }
   
-  createList = () => {
+  function createList() {
 
-      const {shares, mapPrices} = this.props;
+      const {shares, mapPrices, sellShares, id} = props;
 
       return shares.length === 0 
         ? <div>Your portfolio is empty.</div>
@@ -48,40 +47,38 @@ class PortfolioContainer extends Component {
             <TradeLine       
               latestPrice={mapPrices[tradeItem.ticker].latestPrice}
               diffPrice={mapPrices[tradeItem.ticker].trend}
-              trendPriceColor={this.trendPriceColor}
+              trendPriceColor={trendPriceColor}
               data={tradeItem} 
-              sellShares={(shareId) => this.props.sellShares(this.props.id, shareId)}
+              sellShares={(shareId) => sellShares(id, shareId)}
               />
           </div>)
   }
 
-  getCurrentValueStock = () => {
+  function getCurrentValueStock() {
 
-    const {shares, mapPrices} = this.props;
+    const {shares, mapPrices} = props;
 
     let total = shares.reduce( 
-      (accum, transaction) => {
+      (acc, transaction) => {
 
         let pricePerShare = symbolLibrary.getTotalPrice(transaction.buy_amount, mapPrices[transaction.ticker].latestPrice)
 
-        return accum + pricePerShare
+        return acc + pricePerShare
 
     }, 0.00)
 
     return symbolLibrary.formatCurrency(total)
   }
 
-  render() {
     return (
         <div className='sub-container'>
           <div className="header">
-            PORTFOLIO Current Value ${this.getCurrentValueStock()} USD*
+            PORTFOLIO Current Value ${getCurrentValueStock()} USD*
           </div>
-          {this.createList()}
+          {createList()}
           <div className="footnote">* Values calculated with Exchange Latest Prices.</div>
         </div>
     );
-  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioList);

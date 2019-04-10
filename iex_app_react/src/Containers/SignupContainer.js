@@ -1,20 +1,20 @@
-//MODULE IMPORTS
+//IMPORT MODULE
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter, NavLink} from 'react-router-dom';
 
-//ADAPTERS
+//IMPORT ADAPTERS
 import {config} from './../Adapters/AdapterConstants'
 import AdapterAuth from './../Adapters/AdapterAuth'
 
-// ACTIONS
+//IMPORT ACTIONS
 import { jwtSavedInLocalStorage } from './../Actions/userAuthActions';
 import { addErrorMessage, cleanErrorMessages } from './../Actions/errorMessageActions';
 
 //CONSTANTS
 const {URL_LOGIN, URL_PORTFOLIO, URL_SIGNUP} = config.route;
 
-// REDUX PROPS 
+// REDUX 
 const mapDispatchToProps = dispatch => {
   return {
     jwtSavedInLocalStorage: () => dispatch(jwtSavedInLocalStorage()),
@@ -45,7 +45,6 @@ class Signup extends Component {
 
   handleChange = (event) => {
     
-
     if(Object.keys(this.props.errorMessages).length > 0) this.props.cleanErrorMessages();
 
     this.setState({

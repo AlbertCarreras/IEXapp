@@ -1,11 +1,11 @@
-//MODULE IMPORTS
-import React, { Component } from 'react';
+//IMPORT MODULES
+import React from 'react';
 import { connect } from "react-redux";
 
-//ADAPTERS
+//IMPORT ADAPTERS
 import symbolLibrary from '../Adapters/Adapters'
 
-//COMPONENTS
+//IMPORT COMPONENTS
 import PurchaseForm from './PurchaseForm'
 
 //REDUX
@@ -15,11 +15,9 @@ const mapStateToProps = state => {
    }
 }
 
-class PurchaseContainer extends Component {
+const PurchaseContainer = props => {
 
-  render() {
-
-    const {currentBalance} = this.props;
+    const {currentBalance} = props;
 
     return (
       <div className="sub-container container-flex-column">
@@ -31,7 +29,6 @@ class PurchaseContainer extends Component {
         <PurchaseForm />
       </div>
     );
-  }
 }
 
 export default connect(mapStateToProps, null)(PurchaseContainer);
