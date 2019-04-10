@@ -13,7 +13,8 @@ import { buyShares } from './../Actions/sharesActions';
 const mapStateToProps = state => {
   return {
       errorMessages: state.errorMessage.errorMessages,
-      id: state.user.id
+      id: state.user.id,
+      accountBalance: state.trading.accountBalance
   }
 }
 
@@ -96,11 +97,20 @@ class PurchaseForm extends Component {
     }
   }
 
-  buyShares = () => {
-    const {ticker, quantity} = this.state
-    const {buyShares, id} = this.props
+  validateBalance = () => {
+    const {tickerPrice, quantity, ticker} = this.state;
+    const {buyShares, accountBalance, id} = this.props;
 
-    buyShares(ticker, quantity, id)
+    let total = quantity * tickerPrice
+    accountBalance - total >= 0 
+      ? buyShares(ticker, quantity, id)
+      : this.props.addErrorMessage("insufficientFunds", "There aren't sufficient funds in the account.")
+  }
+
+  validateForm = () => {    
+    this.state.quantity > 0 
+      ? this.validateBalance()
+      : this.props.addErrorMessage("blankQty", "Enter a quantity.")
     this.cleanState()
   }
 
@@ -119,7 +129,7 @@ class PurchaseForm extends Component {
                   value={ticker.toUpperCase()} />
               </label>
 
-              <div>{this.displayMessage("invalidTicker")}</div>
+              <div className="validation-message">{this.displayMessage("invalidTicker")}</div>
 
               <label>
                 <input 
@@ -135,14 +145,14 @@ class PurchaseForm extends Component {
                   value={quantity} />
               </label>
 
-              <div>{this.displayMessage("insufficientFunds")}</div>
+              <div className="validation-message">{this.displayMessage("blankQty")}{this.displayMessage("insufficientFunds")}</div>
               <div>{this.displayTotal()}</div>
               
               <input 
                   className="button"
                   type="button" 
                   value="Purchase" 
-                  onClick={this.buyShares}/>
+                  onClick={this.validateForm}/>
 
         </div>
       </div>
