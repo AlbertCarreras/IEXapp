@@ -39,7 +39,12 @@ class Signup extends Component {
     confirmPassword: ""
   }
 
+  componentDidMount() {
+    this.props.cleanErrorMessages();
+  }
+
   handleChange = (event) => {
+    
 
     if(Object.keys(this.props.errorMessages).length > 0) this.props.cleanErrorMessages();
 
@@ -54,7 +59,7 @@ class Signup extends Component {
     const {errorMessages} = this.props;
 
     return errorMessages[field] 
-            ? <p>{errorMessages[field]}</p>
+            ? <div className="validation-message">{errorMessages[field]}</div>
             : null
   }
 

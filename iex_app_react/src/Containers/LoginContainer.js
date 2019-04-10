@@ -34,6 +34,10 @@ class Login extends Component {
     password: ""
   }
 
+  componentDidMount() {
+    this.props.cleanErrorMessages();
+  }
+
   handleChange = (event) => {
     if(Object.keys(this.props.errorMessages).length > 0) this.props.cleanErrorMessages();
     
@@ -42,10 +46,45 @@ class Login extends Component {
     })
   }
 
+  // Helper method to display error messages under each field.
+  displayErrors = (field) => {
+
+    const {errorMessages} = this.props;
+
+    return errorMessages[field] 
+            ? <div className="validation-message">{errorMessages[field]}</div>
+            : null
+  }
+  
+
   handlePressEnter = (event) => {
     if (event.key === "Enter" ) {
-      this.handleSubmit();
+      this.evaluateFields();
     }
+  }
+
+  evaluateFields = () => {
+
+    const {cleanErrorMessages, addErrorMessage} = this.props;
+    const {email, password} = this.state;
+
+    cleanErrorMessages();
+
+    var submitLogIn = true;
+
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      submitLogIn = false;
+      addErrorMessage("email", "Invalid email address.")
+    }
+
+    if (!(password.length > 7)) {
+      submitLogIn = false;
+      addErrorMessage("password", "Password must be at least 8 characters.")
+    }
+
+    return submitLogIn
+      ? this.handleSubmit() 
+      : null;
   }
   
   handleSubmit = () => {
@@ -93,6 +132,8 @@ class Login extends Component {
                   onKeyUp={this.handlePressEnter}
                   value={email} />
               </label>
+              {this.displayErrors("email")}
+
               <label>
                 <input 
                   type="password"
@@ -102,10 +143,11 @@ class Login extends Component {
                   onKeyUp={this.handlePressEnter}
                   value={password} />
               </label>
+              {this.displayErrors("password")}
               <input 
                   className="button"
                   type="button" 
-                  onClick={this.handleSubmit}
+                  onClick={this.evaluateFields}
                   value="Log me in!" />
             </div>
           
