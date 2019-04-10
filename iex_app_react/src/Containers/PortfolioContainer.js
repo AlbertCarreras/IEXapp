@@ -53,15 +53,15 @@ class PortfolioContainer extends Component {
 
   render() {
     return (
-      <div className="container-flex-row portfolio-container">
+        <Fragment>
         { this.isPortfolioUpdating() 
           ? <div>Updating your portfolio...</div>
-          : <Fragment>
+          : <div className="portfolio-container">
               <PortfolioList />
               <PurchaseContainer />
-            </Fragment>
+            </div>
         }
-      </div>
+        </Fragment>
     );
   }
 }
