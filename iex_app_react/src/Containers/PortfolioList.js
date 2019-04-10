@@ -15,7 +15,7 @@ import { sellShares } from './../Actions/sharesActions';
 const mapStateToProps = state => {
   return { 
     id: state.user.id,
-    transactions: state.trading.transactionList,
+    shares: state.trading.shareList,
     currentValueStocks: state.trading.currentValueStocks,
     mapPrices: state.trading.mapPrices,
    }
@@ -37,11 +37,11 @@ class PortfolioContainer extends Component {
   
   createList = () => {
 
-      const {transactions, mapPrices} = this.props;
+      const {shares, mapPrices} = this.props;
 
-      return transactions.length === 0 
+      return shares.length === 0 
         ? <div>Your portfolio is empty.</div>
-        : transactions
+        : shares
           .sort((a,b) => mapPrices[a.ticker].trend - mapPrices[b.ticker].trend
           )
           .map( tradeItem => <div key={tradeItem.id}>
@@ -57,9 +57,9 @@ class PortfolioContainer extends Component {
 
   getCurrentValueStock = () => {
 
-    const {transactions, mapPrices} = this.props;
+    const {shares, mapPrices} = this.props;
 
-    let total = transactions.reduce( 
+    let total = shares.reduce( 
       (accum, transaction) => {
 
         let pricePerShare = symbolLibrary.getTotalPrice(transaction.buy_amount, mapPrices[transaction.ticker].latestPrice)

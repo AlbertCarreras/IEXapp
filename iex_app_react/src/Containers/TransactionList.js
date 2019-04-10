@@ -19,7 +19,7 @@ class PortfolioContainer extends Component {
   createList = () => {
       
       const {transactions} = this.props;
-
+      
       return transactions.length === 0 
       ? <div>There is no transaction history.</div>
       : transactions.map( tradeItem => <div key={tradeItem.id}>

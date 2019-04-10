@@ -5,6 +5,7 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.string :ticker
       t.string :status, default: 'active'
+      t.string :currency, default: 'USD'
       t.integer :action_amount
       t.date :action_date
 

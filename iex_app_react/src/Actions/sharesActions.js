@@ -81,7 +81,8 @@ export const buyShares = (ticker, amount, id) => {
         let listBoughtShares = (resp) => dispatch({ 
             type: LIST_BOUGHT_SHARES,
             payload: {
-                new_transaction: resp.share,
+                new_share: resp.share,
+                new_transaction: resp.transaction,
                 balance: resp.balance
             }
         })
@@ -109,7 +110,8 @@ export const sellShares = (id, shareId) => {
         let listCurrentShares = (resp) => dispatch({ 
             type: SAVE_USER_FINANCIALS,
             payload: {
-                transactions: resp.shares,
+                shares: resp.shares,
+                transactions: resp.transactions,
                 balance: resp.balance
             }
         })

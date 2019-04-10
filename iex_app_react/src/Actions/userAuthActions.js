@@ -26,7 +26,6 @@ export const login = () => {
             })
 
             let responseJSON = await response.json()
-            
             let dispatchLogin = (resp) => dispatch( { 
                     type: LOGIN,
                     payload: {
@@ -39,7 +38,8 @@ export const login = () => {
             let dispatchStoreShares = (resp) => dispatch( { 
                     type: SAVE_USER_FINANCIALS,
                     payload: {
-                        transactions: resp.shares,
+                        shares: resp.shares,
+                        transactions: resp.transactions,
                         balance: resp.balance
                     }
                 }) 

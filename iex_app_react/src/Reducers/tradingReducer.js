@@ -8,7 +8,8 @@ import {
 const initialState = {
     accountBalance: undefined,
     mapPrices: {},
-    transactionList: []
+    transactionList: [],
+    shareList: []
 }
 
 export default function userProfileReducer(state = initialState, action) {
@@ -20,11 +21,13 @@ export default function userProfileReducer(state = initialState, action) {
             }
         case SAVE_USER_FINANCIALS:
             return { ...state,
+                shareList: action.payload.shares,
                 transactionList: action.payload.transactions,
                 accountBalance: action.payload.balance
             }
         case LIST_BOUGHT_SHARES:
             return { ...state,
+                shareList: [...state.shareList, action.payload.new_share],
                 transactionList: [...state.transactionList, action.payload.new_transaction],
                 accountBalance: action.payload.balance,
                 mapPrices: {}

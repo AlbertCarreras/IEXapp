@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_213048) do
+ActiveRecord::Schema.define(version: 2019_04_10_040322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,10 +20,22 @@ ActiveRecord::Schema.define(version: 2019_04_01_213048) do
     t.string "ticker"
     t.integer "buy_amount"
     t.date "buy_date"
+    t.integer "buy_currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "buy_price", precision: 10, scale: 2
-    t.string "buy_currency"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "ticker"
+    t.string "status", default: "active"
+    t.string "currency", default: "USD"
+    t.integer "action_amount"
+    t.date "action_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "action_price", precision: 10, scale: 2
   end
 
   create_table "users", force: :cascade do |t|

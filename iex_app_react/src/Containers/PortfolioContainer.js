@@ -13,7 +13,7 @@ import { getCurrentSharePrices } from '../Actions/sharesActions';
 const mapStateToProps = state => {
   return { 
     currentBalance: state.trading.accountBalance,
-    transactions: state.trading.transactionList,
+    shares: state.trading.shareList,
     currentValueStocks: state.trading.currentValueStocks,
     mapPrices: state.trading.mapPrices,
    }
@@ -21,7 +21,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCurrentSharePrices: (transactions) => dispatch(getCurrentSharePrices(transactions)), 
+    getCurrentSharePrices: (shares) => dispatch(getCurrentSharePrices(shares)), 
   }
 }
 
@@ -32,21 +32,21 @@ class PortfolioContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.transactions !== prevProps.transactions) {
+    if (this.props.shares !== prevProps.shares) {
       this.getCurrentSharePrices()
     }
   }
 
   getCurrentSharePrices = () => {
-    const {transactions, getCurrentSharePrices} = this.props;
-    if (transactions.length !== 0) return getCurrentSharePrices(transactions)
+    const {shares, getCurrentSharePrices} = this.props;
+    if (shares.length !== 0) return getCurrentSharePrices(shares)
   }
 
   isPortfolioUpdating = () => {
 
-    const {transactions, mapPrices} = this.props;
+    const {shares, mapPrices} = this.props;
 
-    return (transactions.length !== 0 
+    return (shares.length !== 0 
     && 
     Object.entries(mapPrices).length === 0)
   }
