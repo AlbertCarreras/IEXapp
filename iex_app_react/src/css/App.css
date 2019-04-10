@@ -35,7 +35,7 @@
 }
 
 .form {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   margin: 10px 0px;
 }
 
@@ -91,12 +91,8 @@ input {
   text-decoration-line: underline;
 }
 
-.selectedTab {
-
-}
-
 .main-container {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .header {
@@ -158,8 +154,6 @@ input {
 .trend-price {
   margin: 0px 10px;
 }
-
-/* not implemented */
 
 @media screen and (max-width: 800px) {
   .portfolio-container{
