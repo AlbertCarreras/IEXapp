@@ -7,6 +7,9 @@ import divStyleLibrary from '../Styling/DivStyleLibrary'
 
 const TradeLine = props => {
     const {id, buy_amount, ticker, buy_currency} = props.data;
+    const latestPrice = props.mapPrices[ticker].latestPrice
+    const diffPrice = props.mapPrices[ticker].trend
+
     const color = props.trendPriceColor(props.diffPrice)
 
     return (
@@ -22,7 +25,7 @@ const TradeLine = props => {
                 onClick={() => props.sellShares(id)}
                 >Sell</div>
             
-            <span>{symbolLibrary.getTotalFormattedPrice(buy_amount, props.latestPrice)}</span>
+            <span>{symbolLibrary.getTotalFormattedPrice(buy_amount, latestPrice)}</span>
             
             <span className="portfolio-note">
                 <span>{buy_currency} </span>
@@ -32,7 +35,7 @@ const TradeLine = props => {
             
             <span className="trend-price portfolio-note">
                 <span>{divStyleLibrary.arrow[color]}</span>
-                <span>{symbolLibrary.formatCurrency(props.diffPrice)}</span>
+                <span>{symbolLibrary.formatCurrency(diffPrice)}</span>
             </span>
             
         </div>

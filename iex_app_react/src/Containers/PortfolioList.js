@@ -44,13 +44,12 @@ const PortfolioList = props => {
           .sort((a,b) => mapPrices[a.ticker].trend - mapPrices[b.ticker].trend
           )
           .map( tradeItem => <div key={tradeItem.id}>
-            <TradeLine       
-              latestPrice={mapPrices[tradeItem.ticker].latestPrice}
-              diffPrice={mapPrices[tradeItem.ticker].trend}
+            <TradeLine  
+              mapPrices={mapPrices}     
               trendPriceColor={trendPriceColor}
               data={tradeItem} 
               sellShares={(shareId) => sellShares(id, shareId)}
-              />
+            />
           </div>)
   }
 
