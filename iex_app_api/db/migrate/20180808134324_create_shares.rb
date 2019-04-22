@@ -5,7 +5,7 @@ class CreateShares < ActiveRecord::Migration[5.2]
       t.string :ticker
       t.integer :buy_amount
       t.date :buy_date
-      t.integer :buy_currency
+      t.string :buy_currency
       t.timestamps
     end
   end

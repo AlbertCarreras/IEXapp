@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_04_10_040322) do
     t.string "ticker"
     t.integer "buy_amount"
     t.date "buy_date"
-    t.integer "buy_currency"
+    t.string "buy_currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "buy_price", precision: 10, scale: 2
