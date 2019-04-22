@@ -11,7 +11,7 @@ class LineChart extends Component {
    }
 
    createLineChart = () => {
-    const data = this.props.data
+    const data = this.props.chartData
     
     //Getting node for DOM manipulation
     const node = this.node
