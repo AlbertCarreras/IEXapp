@@ -1,12 +1,14 @@
 ## IEX Trading App 
 
 ## Demo video
-https://www.loom.com/share/275bb6e96b694ed8aa38db343c4a183d
+https://www.loom.com/share/5ccdc55b17814ccf8db8ab0d56c1d196
 
 ## Technologies
 
 ### Front-end
-React bootstrapped with create-react-app
+Framework = React + Redux + Thunk (React bootstrapped with create-react-app)
+Charts = D3
+
 Notes on front-end: 
 
 Code organization
