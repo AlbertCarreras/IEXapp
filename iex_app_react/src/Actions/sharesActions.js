@@ -25,6 +25,7 @@ export const getCurrentSharePrices = (transactions) => {
         let url =`https://api.iextrading.com/1.0/stock/market/batch?symbols=${strSymb}&types=quote`
 
         function mapJson(resp) { 
+            console.log(resp)
             let map = {}
             for(let i in resp) {
                 let openPrice = resp[i].quote.open
