@@ -123,9 +123,12 @@ input {
   margin: 20px;
 }
 
-.list-item {
+.list-box {
   padding: 10px;
   border-bottom: 1px solid black;
+}
+
+.list-item {
   flex-wrap: wrap;
   justify-content: flex-start;
 }

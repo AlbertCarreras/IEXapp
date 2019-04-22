@@ -3,40 +3,25 @@ import React from 'react';
 import { connect } from "react-redux";
 
 //IMPORT COMPONENTS
-import TradeLine from '../Presentational/TradeLine'
+import TradeContainer from './TradeContainer'
 
 //IMPORT ADAPTERS
 import symbolLibrary from '../Adapters/Adapters'
 
-//IMPORT ACTIONS
-import { sellShares } from './../Actions/sharesActions';
-
 //REDUX
 const mapStateToProps = state => {
   return { 
-    id: state.user.id,
     shares: state.trading.shareList,
     currentValueStocks: state.trading.currentValueStocks,
     mapPrices: state.trading.mapPrices,
    }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    sellShares: (id, shareId) => dispatch(sellShares(id, shareId))
-  }
-}
-
 const PortfolioList = props => {
-
-  function trendPriceColor(diffPrices) {
-    if (diffPrices === 0) return "grey"
-    return diffPrices < 0 ? "green" : "red"
-  }
   
   function createList() {
 
-      const {shares, mapPrices, sellShares, id} = props;
+      const {shares, mapPrices} = props;
 
       return shares.length === 0 
         ? <div>Your portfolio is empty.</div>
@@ -44,11 +29,8 @@ const PortfolioList = props => {
           .sort((a,b) => mapPrices[a.ticker].trend - mapPrices[b.ticker].trend
           )
           .map( tradeItem => <div key={tradeItem.id}>
-            <TradeLine  
-              mapPrices={mapPrices}     
-              trendPriceColor={trendPriceColor}
+            <TradeContainer  
               data={tradeItem} 
-              sellShares={(shareId) => sellShares(id, shareId)}
             />
           </div>)
   }
@@ -80,4 +62,4 @@ const PortfolioList = props => {
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortfolioList);
+export default connect(mapStateToProps, null)(PortfolioList);
