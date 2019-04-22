@@ -50,7 +50,7 @@ class LineChart extends Component {
         .attr("transform", "rotate(-45)");
     
     var y = scaleLinear()
-        .domain([0,extent(data, function(d) { return d.open })[1]])
+        .domain(extent(data, function(d) { return d.open }))
         .rangeRound([height, 0]);
     
     //appends new g tag for the axisLeft, it positions it, uses domain from var y, and adds label
